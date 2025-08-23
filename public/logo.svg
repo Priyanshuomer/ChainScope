@@ -1,0 +1,20 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">ChainScope Logo</title>
+  <desc id="logoDesc">ChainScope blockchain network explorer logo featuring an enhanced chain link and four-pointed star</desc>
+  
+  <!-- Green gradient background for brand consistency -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="256" height="256" fill="url(#bgGrad)" rx="32"/>
+  
+  <!-- Enhanced Chain Link - Larger and more visible -->
+  <path d="M190 190A95 95 0 1 1 190 65L160 90A60 60 0 1 0 160 165z" fill="#ffffff" stroke="#ffffff" stroke-width="3"/>
+  
+  <!-- Enhanced Four-pointed Star - Symbol of connectivity -->
+  <path d="M200 105q12 10 22 22-10 12-22 22-12-10-22-22 10-12 22-22z" fill="#ffffff"/>
+</svg>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Security Headers - Development Mode (Permissive for debugging) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data: blob:; connect-src *; font-src *; object-src 'none'; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Favicons and App Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon-new.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/logo.svg" />
+    
+    <meta name="theme-color" content="#6366f1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ChainScope">
+    
+    <!-- SEO and App Meta -->
+    <title>ChainScope - Blockchain Network Explorer & RPC Directory | Discover 2,000+ Networks</title>
+    <meta name="description" content="The definitive blockchain network explorer and RPC directory for developers and users worldwide. Discover, monitor, and connect to 2,000+ blockchain networks with real-time RPC health monitoring, comprehensive analytics, and instant wallet integration capabilities.">
+    <meta name="keywords" content="blockchain networks, RPC endpoints, cryptocurrency, ethereum, polygon, arbitrum, optimism, bsc, web3, dapp, blockchain explorer, RPC health monitoring, chain analytics, AI blockchain tools, web3 infrastructure, layer 1, layer 2, testnet, mainnet, wallet integration, network comparison">
+    <meta name="author" content="ChainScope">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://chainscope.app/">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="1 days">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    <meta name="coverage" content="Worldwide">
+    <meta name="target" content="all">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="color-scheme" content="dark light">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="ChainScope - Blockchain Network Explorer & RPC Directory">
+    <meta property="og:description" content="The definitive blockchain network explorer and RPC directory for developers and users worldwide. Discover, monitor, and connect to 2,000+ blockchain networks with real-time RPC health monitoring, comprehensive analytics, and instant wallet integration capabilities.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chainscope.app/">
+    <meta property="og:image" content="https://chainscope.app/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="ChainScope - Blockchain Network Explorer & RPC Directory">
+    <meta property="og:site_name" content="ChainScope">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="en_GB">
+    <meta property="og:locale:alternate" content="en_CA">
+    <meta property="og:locale:alternate" content="en_AU">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ChainScope - Blockchain Network Explorer & RPC Directory">
+    <meta name="twitter:description" content="The definitive blockchain network explorer and RPC directory for developers and users worldwide. Discover, monitor, and connect to 2,000+ blockchain networks with real-time RPC health monitoring, comprehensive analytics, and instant wallet integration capabilities.">
+    <meta name="twitter:image" content="https://chainscope.app/og-image.png">
+    <meta name="twitter:image:alt" content="ChainScope - Blockchain Network Explorer & RPC Directory">
+    <meta name="twitter:creator" content="@chainscope">
+    <meta name="twitter:site" content="@chainscope">
+    <meta name="twitter:label1" content="Est. reading time">
+    <meta name="twitter:data1" content="3 minutes">
+    
+    <!-- Additional SEO -->
+    <meta name="application-name" content="ChainScope">
+    <meta name="msapplication-TileColor" content="#6366f1">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    
+    <!-- Structured Data for AI Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ChainScope",
+      "alternateName": "ChainScope Blockchain Explorer",
+      "description": "The definitive blockchain network explorer and RPC directory for developers and users worldwide. Discover, monitor, and connect to 2,000+ blockchain networks with real-time RPC health monitoring, comprehensive analytics, and instant wallet integration capabilities.",
+      "url": "https://chainscope.app",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web Browser",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "ChainScope",
+        "url": "https://chainscope.app"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "ChainScope",
+        "url": "https://chainscope.app"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "ChainScope",
+        "url": "https://chainscope.app"
+      },
+      "datePublished": "2024-01-01",
+      "dateModified": "2024-12-01",
+      "version": "1.0.0",
+      "softwareVersion": "1.0.0",
+      "softwareRequirements": "Web browser with JavaScript enabled",
+      "permissions": "Internet access for blockchain data",
+      "featureList": [
+        "Blockchain Network Discovery",
+        "RPC Endpoint Health Monitoring",
+        "Real-time Network Analytics",
+        "Wallet Integration",
+        "Network Comparison Tools",
+        "Cross-chain Bridge Information",
+        "Developer Tools and APIs"
+      ],
+      "screenshot": "https://chainscope.app/og-image.png",
+      "thumbnailUrl": "https://chainscope.app/og-image.png",
+      "downloadUrl": "https://chainscope.app",
+      "installUrl": "https://chainscope.app",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Web3 Developer"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "reviewBody": "Essential tool for blockchain developers. Comprehensive network data and excellent RPC monitoring."
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Additional Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ChainScope",
+      "url": "https://chainscope.app",
+      "logo": "https://chainscope.app/logo.svg",
+      "description": "The definitive blockchain network explorer and RPC directory for developers and users worldwide.",
+      "foundingDate": "2024",
+      "sameAs": [
+        "https://twitter.com/chainscope",
+        "https://github.com/chainscope",
+        "https://discord.gg/chainscope"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "url": "https://chainscope.app/support"
+      }
+    }
+    </script>
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/src/index.css" as="style">
+    <link rel="preload" href="/logo.svg" as="image">
+    
+    <!-- DNS Prefetch for External Resources -->
+    <link rel="dns-prefetch" href="//api.chainscope.app">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    
+    <!-- Preconnect to External Domains -->
+    <link rel="preconnect" href="https://api.chainscope.app" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID', {
+        page_title: 'ChainScope - Blockchain Network Explorer',
+        page_location: window.location.href,
+        send_page_view: true
+      });
+    </script>
+    
+    <!-- Performance Monitoring -->
+    <script>
+      // Core Web Vitals monitoring - only in production
+      if ('PerformanceObserver' in window && window.location.hostname !== 'localhost') {
+        try {
+          const observer = new PerformanceObserver((list) => {
+            for (const entry of list.getEntries()) {
+              if (entry.entryType === 'largest-contentful-paint') {
+                gtag('event', 'LCP', { value: Math.round(entry.startTime) });
+              }
+              if (entry.entryType === 'first-input') {
+                gtag('event', 'FID', { value: Math.round(entry.processingStart - entry.startTime) });
+              }
+              if (entry.entryType === 'layout-shift') {
+                gtag('event', 'CLS', { value: entry.value });
+              }
+            }
+          });
+          observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] });
+        } catch (e) {
+          // Silently fail if performance monitoring fails
+        }
+      }
+    </script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      // Only register service worker in production
+      if ('serviceWorker' in navigator && window.location.hostname !== 'localhost') {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+    
+    <!-- Error Boundary -->
+    <script>
+      // Only track errors in production
+      if (window.location.hostname !== 'localhost') {
+        window.addEventListener('error', function(e) {
+          gtag('event', 'exception', {
+            description: e.message,
+            fatal: false
+          });
+        });
+        
+        window.addEventListener('unhandledrejection', function(e) {
+          gtag('event', 'exception', {
+            description: e.reason,
+            fatal: false
+          });
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

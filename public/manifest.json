@@ -1,0 +1,68 @@
+{
+  "name": "ChainScope - Blockchain Network Explorer & RPC Directory",
+  "short_name": "ChainScope",
+  "description": "The definitive blockchain network explorer and RPC directory for developers and users worldwide. Discover, monitor, and connect to 2,000+ blockchain networks with real-time RPC health monitoring, comprehensive analytics, and instant wallet integration capabilities.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["productivity", "utilities", "finance", "developer"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ],
+
+  "shortcuts": [
+    {
+      "name": "Compare Networks",
+      "short_name": "Compare",
+      "description": "Compare multiple blockchain networks side-by-side",
+      "url": "/compare",
+      "icons": [
+        {
+          "src": "/shortcut-compare.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Analytics Dashboard",
+      "short_name": "Analytics",
+      "description": "View comprehensive blockchain network analytics",
+      "url": "/#analytics",
+      "icons": [
+        {
+          "src": "/shortcut-analytics.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "protocol_handlers": [
+    {
+      "protocol": "web+chainscope",
+      "url": "/chain/%s"
+    }
+  ]
+} 

@@ -1,0 +1,56 @@
+# ChainScope SEO-Optimized URL Redirects
+# 301 redirects from legacy chain ID URLs to semantic URLs
+# This ensures SEO link equity is preserved and user experience is improved
+
+# Tier 1 - Major L1 Networks
+/chain/1 /network/ethereum 301!
+/chain/56 /network/binance-smart-chain 301!
+/chain/43114 /network/avalanche 301!
+
+# Tier 2 - Major L2 Networks  
+/chain/137 /network/polygon 301!
+/chain/42161 /network/arbitrum-one 301!
+/chain/10 /network/optimism 301!
+/chain/8453 /network/base 301!
+/chain/1101 /network/polygon-zkevm 301!
+/chain/59144 /network/linea 301!
+/chain/534352 /network/scroll 301!
+/chain/324 /network/zksync-era 301!
+
+# Tier 3 - Popular Alternative Networks
+/chain/250 /network/fantom 301!
+/chain/100 /network/gnosis 301!
+/chain/42220 /network/celo 301!
+/chain/1284 /network/moonbeam 301!
+/chain/25 /network/cronos 301!
+/chain/1313161554 /network/aurora 301!
+/chain/1666600000 /network/harmony-one 301!
+
+# Testnets
+/chain/11155111 /network/ethereum-sepolia 301!
+/chain/5 /network/ethereum-goerli 301!
+/chain/80001 /network/polygon-mumbai 301!
+/chain/421613 /network/arbitrum-goerli 301!
+/chain/420 /network/optimism-goerli 301!
+/chain/84531 /network/base-goerli 301!
+/chain/97 /network/bsc-testnet 301!
+/chain/43113 /network/avalanche-fuji 301!
+/chain/4002 /network/fantom-testnet 301!
+
+# Category redirects for better SEO structure
+/layer2 /layer2-networks 301!
+/l2 /layer2-networks 301!
+/mainnet /networks 301!
+/testnet /testnets 301!
+
+# Legacy paths
+/chains /networks 301!
+/blockchain /networks 301!
+/networks.html /networks 301!
+
+# Ensure trailing slashes are handled consistently
+/network/* /network/:splat 200!
+/chain/* /chain/:splat 200!
+
+# SPA fallback for React Router
+/* /index.html 200

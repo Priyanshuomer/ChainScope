@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
+  <!-- Main Pages -->
+  <url>
+    <loc>https://chainscope.app/</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>1.0</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/og-image.svg</image:loc>
+      <image:title>ChainScope - Blockchain Network Explorer</image:title>
+      <image:caption>Discover and connect to 2000+ blockchain networks with real-time RPC monitoring</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Category Pages for SEO -->
+  <url>
+    <loc>https://chainscope.app/networks</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/layer1-networks</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/layer2-networks</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/testnets</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/sidechains</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/rollups</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+    <mobile:mobile/>
+  </url>
+
+  <!-- Semantic Network URLs - Tier 1 (Major L1 Networks) -->
+  <url>
+    <loc>https://chainscope.app/network/ethereum</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/ethereum.png</image:loc>
+      <image:title>Ethereum Mainnet - Blockchain Network Information</image:title>
+      <image:caption>Complete Ethereum mainnet information including RPC endpoints, network statistics, and wallet configuration</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/binance-smart-chain</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/bnb.png</image:loc>
+      <image:title>BNB Smart Chain - Blockchain Network Information</image:title>
+      <image:caption>Complete BNB Smart Chain information including RPC endpoints and DeFi ecosystem</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/avalanche</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/avalanche.png</image:loc>
+      <image:title>Avalanche C-Chain - Blockchain Network Information</image:title>
+      <image:caption>Complete Avalanche C-Chain information including RPC endpoints and subnet details</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Tier 2 (Major L2 Networks) -->
+  <url>
+    <loc>https://chainscope.app/network/polygon</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/polygon.png</image:loc>
+      <image:title>Polygon Mainnet - Layer 2 Scaling Solution</image:title>
+      <image:caption>Complete Polygon mainnet information, Layer 2 scaling solution for Ethereum</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/arbitrum-one</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/arbitrum.png</image:loc>
+      <image:title>Arbitrum One - Layer 2 Scaling Solution</image:title>
+      <image:caption>Complete Arbitrum One information, Optimistic Rollup for Ethereum</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/optimism</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/optimism.png</image:loc>
+      <image:title>Optimism - Layer 2 Scaling Solution</image:title>
+      <image:caption>Complete Optimism information, Optimistic Rollup for Ethereum</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/base</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/base.png</image:loc>
+      <image:title>Base - Layer 2 Network by Coinbase</image:title>
+      <image:caption>Complete Base network information, Layer 2 solution built by Coinbase</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/polygon-zkevm</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/polygon-zkevm.png</image:loc>
+      <image:title>Polygon zkEVM - Zero-Knowledge Layer 2</image:title>
+      <image:caption>Complete Polygon zkEVM information, zero-knowledge rollup technology</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/linea</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.75</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/linea.png</image:loc>
+      <image:title>Linea - zkEVM Layer 2 Network</image:title>
+      <image:caption>Complete Linea information, zero-knowledge rollup by Consensys</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/scroll</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.70</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/scroll.png</image:loc>
+      <image:title>Scroll - zkEVM Layer 2 Network</image:title>
+      <image:caption>Complete Scroll information, zero-knowledge rollup for Ethereum</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/zksync-era</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.75</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/zksync.png</image:loc>
+      <image:title>zkSync Era - Zero-Knowledge Layer 2</image:title>
+      <image:caption>Complete zkSync Era information, zero-knowledge rollup by Matter Labs</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Tier 3 (Popular Alternative Networks) -->
+  <url>
+    <loc>https://chainscope.app/network/fantom</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.70</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/fantom.png</image:loc>
+      <image:title>Fantom Opera - High-Performance Blockchain</image:title>
+      <image:caption>Complete Fantom Opera information, high-speed blockchain network</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/gnosis</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.65</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/gnosis.png</image:loc>
+      <image:title>Gnosis Chain - Decentralized Blockchain</image:title>
+      <image:caption>Complete Gnosis Chain information, community-owned blockchain network</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/celo</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.60</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/celo.png</image:loc>
+      <image:title>Celo - Mobile-First Blockchain</image:title>
+      <image:caption>Complete Celo information, mobile-first blockchain for financial inclusion</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/moonbeam</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.60</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/moonbeam.png</image:loc>
+      <image:title>Moonbeam - Ethereum-Compatible Parachain</image:title>
+      <image:caption>Complete Moonbeam information, Ethereum-compatible parachain on Polkadot</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/cronos</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.55</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/cronos.png</image:loc>
+      <image:title>Cronos - Crypto.com Blockchain</image:title>
+      <image:caption>Complete Cronos information, blockchain network by Crypto.com</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/aurora</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.55</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/aurora.png</image:loc>
+      <image:title>Aurora - Ethereum Virtual Machine on NEAR</image:title>
+      <image:caption>Complete Aurora information, EVM on NEAR Protocol</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/harmony-one</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.50</priority>
+    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://chainscope.app/assets/chains/harmony.png</image:loc>
+      <image:title>Harmony One - Fast and Secure Blockchain</image:title>
+      <image:caption>Complete Harmony One information, fast and secure blockchain network</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Testnet Networks -->
+  <url>
+    <loc>https://chainscope.app/network/ethereum-sepolia</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.30</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/ethereum-goerli</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.25</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/polygon-mumbai</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.30</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/arbitrum-goerli</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.25</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/optimism-goerli</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.25</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/base-goerli</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.25</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/bsc-testnet</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.25</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/avalanche-fuji</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.25</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/network/fantom-testnet</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.20</priority>
+    <mobile:mobile/>
+  </url>
+
+  <!-- Other Important Pages -->
+  <url>
+    <loc>https://chainscope.app/compare</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/trending</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/analytics</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/privacy</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/terms</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/disclaimer</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <mobile:mobile/>
+  </url>
+  <url>
+    <loc>https://chainscope.app/cookies</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+    <mobile:mobile/>
+  </url>
+
+</urlset>

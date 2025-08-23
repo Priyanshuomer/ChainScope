@@ -1,0 +1,205 @@
+<<<<<<< HEAD
+# ChainScope Robots.txt
+# Advanced SEO directives for search engines and AI crawlers
+# Optimized for Generative Engine Optimization (GEO)
+
+# Default rules for all bots
+User-agent: *
+Allow: /
+Crawl-delay: 1
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/internal/
+Disallow: /_next/static/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /temp/
+Disallow: /cache/
+
+# Allow API endpoints for data access
+Allow: /api/chains
+Allow: /api/rpc-health
+Allow: /api/analytics
+
+# Major Search Engines - Full Access
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+=======
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+>>>>>>> aeab2713a23e3baa817d08d88d47c8dba48e2cf1
+
+User-agent: facebookexternalhit
+Allow: /
+
+<<<<<<< HEAD
+# AI Training & Generative Engine Bots - Enhanced Access
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 0.5
+# High-quality blockchain data for training
+
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: CCBot
+Allow: /
+Crawl-delay: 0.5
+# CommonCrawl for research
+
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: YouBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: BingAI
+Allow: /
+Crawl-delay: 0.5
+
+# Academic and Research Bots
+User-agent: ia_archiver
+Allow: /
+# Internet Archive
+
+User-agent: Wayback
+Allow: /
+# Wayback Machine
+
+User-agent: CiteSeerXBot
+Allow: /
+# Academic citations
+
+# SEO and Analytics Bots
+User-agent: AhrefsBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: SemrushBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: MJ12bot
+Allow: /
+Crawl-delay: 2
+
+User-agent: DotBot
+Allow: /
+Crawl-delay: 2
+
+# Social Media Crawlers
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: SkypeUriPreview
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Blockchain-specific crawlers
+User-agent: EthereumBot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: Web3Bot
+Allow: /
+Crawl-delay: 0.5
+
+# Bad bots - Limited access
+User-agent: SiteAuditBot
+Crawl-delay: 10
+
+User-agent: AhrefsBot
+Crawl-delay: 5
+
+User-agent: BLEXBot
+Crawl-delay: 10
+
+# Spam bots - Block completely
+User-agent: SemrushBot-SA
+Disallow: /
+
+User-agent: MegaIndex.ru
+Disallow: /
+
+User-agent: BLEXBot/1.0
+Disallow: /
+
+User-agent: sistrix
+Disallow: /
+
+# Multiple Sitemap Locations for Comprehensive Coverage
+Sitemap: https://chainscope.app/sitemap.xml
+Sitemap: https://chainscope.app/sitemap-static.xml
+Sitemap: https://chainscope.app/sitemap-popular.xml
+Sitemap: https://chainscope.app/sitemap-layer1.xml
+Sitemap: https://chainscope.app/sitemap-layer2.xml
+Sitemap: https://chainscope.app/sitemap-verified.xml
+Sitemap: https://chainscope.app/rss.xml
+
+# Clean URLs directive
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term
+
+# Host directive (canonical domain)
+Host: https://chainscope.app
+
+# Request rate limiting for heavy crawlers
+Request-rate: 1/1s
+Visit-time: 0300-0900
+
+# Cache directive for static resources
+Cache-delay: 86400
+=======
+User-agent: *
+Allow: /
+>>>>>>> aeab2713a23e3baa817d08d88d47c8dba48e2cf1
