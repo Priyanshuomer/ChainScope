@@ -72,14 +72,72 @@ export const EnhancedChainCard = memo(({
     }
   }
 
-  const calculateHealthScore = () => {
-    if (!chain.rpcEndpoints || chain.rpcEndpoints.length === 0) return 0
+  // const calculateHealthScore = () => {
+
+  //   // console.log("HEYYYY", chain.rpc);
+  //   if (!chain.rpcEndpoints || chain.rpcEndpoints.length === 0) return 0
+  //   //  console.log("OM");
+
     
-    const onlineEndpoints = chain.rpcEndpoints.filter(rpc => rpc.status === 'online')
-    return Math.round((onlineEndpoints.length / chain.rpcEndpoints.length) * 100)
+  //   const onlineEndpoints = chain.rpcEndpoints.filter(rpc => rpc.status === 'online')
+  //   // console.log(onlineEndpoints);
+  //   return Math.round((onlineEndpoints.length / chain.rpcEndpoints.length) * 100)
+  // }
+
+
+
+
+const calculateHealthScore = () => {
+  // Check if rpcHealth exists and has at least one defined metric
+  if (
+    !chain.rpcHealth || (
+      chain.rpcHealth.averageLatency === undefined &&
+      chain.rpcHealth.reliabilityScore === undefined &&
+      chain.rpcHealth.privacyScore === undefined
+    )
+  ) {
+    return 0
   }
 
+  // Destructure with default fallbacks
+  const {
+    averageLatency = 1000, // high latency = bad by default
+    reliabilityScore = 0,
+    privacyScore = 0,
+  } = chain.rpcHealth
+
+  // Normalize latency to a 0-100 score (lower latency is better)
+  const latencyScore = Math.max(0, Math.min(1, (1000 - averageLatency) / 1000)) * 100
+
+  // Weight how important each metric is
+  const weights = {
+    reliability: 0.5,
+    latency: 0.3,
+    privacy: 0.2,
+  }
+
+  // Compute weighted composite score
+  const score =
+    reliabilityScore * weights.reliability +
+    latencyScore * weights.latency +
+    privacyScore * weights.privacy
+
+  // Clamp and round score to 0-100
+  return Math.round(Math.max(0, Math.min(100, score)))
+}
+
+
+
+//   const calculateHealthScore = () => {
+//   const totalRpcs = chain.rpcEndpoints?.length || 0
+//   const onlineRpcs = chain.rpcEndpoints?.filter(ep => ep.status === 'online').length || 0
+//   return totalRpcs > 0 ? Math.round((onlineRpcs / totalRpcs) * 100) : 0
+// }
+
+
+
   const healthScore = calculateHealthScore()
+  // console.log("health   : ",healthScore);
 
   if (viewMode === 'list') {
     return (
@@ -131,10 +189,10 @@ export const EnhancedChainCard = memo(({
                 <div className="text-lg font-semibold">{chain.rpc?.length || 0}</div>
                 <div className="text-xs text-muted-foreground">RPCs</div>
               </div>
-              <div className="text-center">
+              {/* <div className="text-center">
                 <div className="text-lg font-semibold">{healthScore}%</div>
                 <div className="text-xs text-muted-foreground">Health</div>
-              </div>
+              </div> */}
               <div className="text-center">
                 <div className="text-lg font-semibold">{chain.explorers?.length || 0}</div>
                 <div className="text-xs text-muted-foreground">Explorers</div>
@@ -202,11 +260,11 @@ export const EnhancedChainCard = memo(({
       <CardContent className="space-y-4">
         {/* Health Score */}
         <div className="space-y-2">
-          <div className="flex items-center justify-between text-sm">
+          {/* <div className="flex items-center justify-between text-sm">
             <span className="text-muted-foreground">RPC Health</span>
             <span className="font-medium">{healthScore}%</span>
-          </div>
-          <Progress value={healthScore} className="h-2" />
+          </div> */}
+          {/* <Progress value={healthScore} className="h-2" /> */}
           <div className="flex items-center space-x-2 text-xs text-muted-foreground">
             <Wifi className="w-3 h-3" />
             <span>{chain.rpc?.length || 0} endpoints</span>

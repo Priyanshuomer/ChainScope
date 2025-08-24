@@ -99,7 +99,7 @@ const Index = () => {
           await chainDataMerger.updatePopularChainsRpcHealth()
         } catch (error) {
           // Silently fail - this is background work
-          if (import.meta.env.NODE_ENV === 'development') {
+          if (import.meta.env.VITE_NODE_ENV === 'development') {
             console.warn('Background RPC update failed:', error)
           }
         }

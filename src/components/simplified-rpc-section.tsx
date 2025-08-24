@@ -124,7 +124,10 @@ export const SimplifiedRpcSection = ({ chain }: SimplifiedRpcSectionProps) => {
   }, [sortedRpcEndpoints])
 
   const totalRpcs = chain.rpc.length
-  const onlineRpcs = statusCounts.online
+   const onlineRpcs = statusCounts.online
+  console.log("Shiv : ",onlineRpcs);
+
+  
 
   return (
     <div className="space-y-6">

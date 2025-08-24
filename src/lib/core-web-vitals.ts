@@ -385,7 +385,7 @@ class CoreWebVitals {
 // Export singleton instance
 export const coreWebVitals = new CoreWebVitals({
   reportAllChanges: false,
-  debug: import.meta.env.NODE_ENV === 'development'
+  debug: import.meta.env.VITE_NODE_ENV === 'development'
 })
 
 // Initialize on page load

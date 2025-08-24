@@ -1,26 +1,19 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { 
   Menu, 
   X, 
-  Search, 
   GitCompare, 
   BarChart3, 
-  Globe, 
-  Settings,
-  ExternalLink,
-  ChevronDown,
-  ChevronUp
+  Globe
 } from "lucide-react"
 import { Logo } from "./logo"
+import { WalletConnectButton } from "./wallet-connect-button"  // ✅ Import WalletConnectButton
 
 export const MobileOptimizedHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isSearchExpanded, setIsSearchExpanded] = useState(false)
   const location = useLocation()
 
   const navigationItems = [
@@ -67,7 +60,7 @@ export const MobileOptimizedHeader = () => {
           <Link to="/" className="flex items-center space-x-2" onClick={closeMenu}>
             <Logo size="sm" />
             <span className="hidden sm:inline-block font-bold text-xl bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              ChainScope
+              
             </span>
           </Link>
 
@@ -98,18 +91,9 @@ export const MobileOptimizedHeader = () => {
             })}
           </nav>
 
-          {/* Desktop Actions */}
+          {/* ✅ Desktop Actions - Replaced Contact & Settings with WalletConnectButton */}
           <div className="hidden md:flex items-center space-x-2">
-            <Button variant="outline" size="sm" asChild>
-              <a href="mailto:hello@chainscope.app" target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Contact
-              </a>
-            </Button>
-            <Button size="sm">
-              <Settings className="w-4 h-4 mr-2" />
-              Settings
-            </Button>
+            <WalletConnectButton />
           </div>
 
           {/* Mobile Menu Button */}
@@ -151,18 +135,10 @@ export const MobileOptimizedHeader = () => {
                   </Link>
                 )
               })}
-              
+
+              {/* ✅ Add WalletConnectButton in Mobile Menu too */}
               <div className="pt-4 border-t border-border">
-                <Button variant="outline" size="sm" className="w-full mb-2" asChild>
-                  <a href="mailto:hello@chainscope.app" target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Contact Us
-                  </a>
-                </Button>
-                <Button size="sm" className="w-full">
-                  <Settings className="w-4 h-4 mr-2" />
-                  Settings
-                </Button>
+                <WalletConnectButton />
               </div>
             </div>
           </div>

@@ -71,13 +71,13 @@ class ChainListAPI {
   async fetchChains(): Promise<ChainData[]> {
     // Return cached data if still valid
     if (this.chainsCache.length > 0 && Date.now() - this.cacheTimestamp < this.CACHE_DURATION) {
-      if (import.meta.env.NODE_ENV === 'development') {
+      if (import.meta.env.VITE_NODE_ENV === 'development') {
         console.log(`📦 Using cached chain data: ${this.chainsCache.length} chains`)
       }
       return this.chainsCache
     }
 
-    if (import.meta.env.NODE_ENV === 'development') {
+    if (import.meta.env.VITE_NODE_ENV === 'development') {
       console.log('🚀 Fetching fresh chain data from multiple sources...')
     }
 
@@ -109,7 +109,7 @@ class ChainListAPI {
     // Try each source with timeout and retries
     for (const source of dataSources) {
       try {
-        if (import.meta.env.NODE_ENV === 'development') {
+        if (import.meta.env.VITE_NODE_ENV === 'development') {
           console.log(`🔄 Trying ${source.name}...`)
         }
         const data = await this.fetchWithTimeout(source.url)
@@ -117,7 +117,7 @@ class ChainListAPI {
         if (data) {
           const parsed = await source.parser(data)
           if (parsed && parsed.length > 0) {
-            if (import.meta.env.NODE_ENV === 'development') {
+            if (import.meta.env.VITE_NODE_ENV === 'development') {
               console.log(`✅ ${source.name}: ${parsed.length} chains loaded`)
             }
             allChains = this.mergeChainSources(allChains, parsed)
@@ -126,7 +126,7 @@ class ChainListAPI {
             // If we have enough data from high-priority sources, break early
             const minChainsThreshold = parseInt(import.meta.env.MIN_CHAINS_THRESHOLD || '50')
             if (source.priority <= 2 && allChains.length >= minChainsThreshold) {
-              if (import.meta.env.NODE_ENV === 'development') {
+              if (import.meta.env.VITE_NODE_ENV === 'development') {
                 console.log(`🎯 Sufficient data obtained from high-priority source`)
               }
               break
@@ -134,7 +134,7 @@ class ChainListAPI {
           }
         }
       } catch (error) {
-        if (import.meta.env.NODE_ENV === 'development') {
+        if (import.meta.env.VITE_NODE_ENV === 'development') {
           const errorMessage = error instanceof Error ? error.message : 'Unknown error'
           if (errorMessage.includes('CORS') || errorMessage.includes('blocked')) {
             console.warn(`⚠️ ${source.name} failed due to CORS policy:`, errorMessage)
@@ -148,7 +148,7 @@ class ChainListAPI {
 
     // Validate and cache results
     if (allChains.length > 0) {
-      if (import.meta.env.NODE_ENV === 'development') {
+      if (import.meta.env.VITE_NODE_ENV === 'development') {
         console.log(`🎉 Successfully loaded ${allChains.length} chains from ${successfulSources} sources`)
       }
       this.chainsCache = this.sortAndValidateChains(allChains)
@@ -157,7 +157,7 @@ class ChainListAPI {
     }
 
     // Emergency fallback to expanded local dataset
-    if (import.meta.env.NODE_ENV === 'development') {
+    if (import.meta.env.VITE_NODE_ENV === 'development') {
       console.warn('⚠️ All external sources failed, using comprehensive fallback dataset')
       console.log(`📦 Fallback dataset: ${expandedFallbackChains.length} verified chains`)
     }
@@ -196,7 +196,7 @@ class ChainListAPI {
 
         return await response.json()
       } catch (error) {
-        if (import.meta.env.NODE_ENV === 'development') {
+        if (import.meta.env.VITE_NODE_ENV === 'development') {
           console.warn(`🔄 Attempt ${attempt}/${retries} failed for ${url}:`, error instanceof Error ? error.message : 'Unknown error')
         }
         
@@ -1048,7 +1048,7 @@ class ChainListAPI {
   clearCache(): void {
     this.chainsCache = []
     this.cacheTimestamp = 0
-    if (import.meta.env.NODE_ENV === 'development') {
+    if (import.meta.env.VITE_NODE_ENV === 'development') {
       console.log('🗑️ Chain cache cleared')
     }
   }

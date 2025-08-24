@@ -46,7 +46,7 @@ const queryClient = new QueryClient({
 
 // Register service worker for offline support
 const registerServiceWorker = async () => {
-  if ('serviceWorker' in navigator && import.meta.env.NODE_ENV === 'production') {
+  if ('serviceWorker' in navigator && import.meta.env.VITE_NODE_ENV === 'production') {
     try {
       const registration = await navigator.serviceWorker.register('/sw.js')
       console.log('Service Worker registered successfully:', registration)
