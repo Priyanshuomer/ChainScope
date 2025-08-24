@@ -7,7 +7,7 @@ The ChainScope application is now fully production-ready for launch. All develop
 ## 🔧 Final Production Optimizations Completed
 
 ### 1. **Console Logging Cleanup**
-- ✅ All `console.log` statements wrapped in `process.env.NODE_ENV === 'development'` checks
+- ✅ All `console.log` statements wrapped in `import.meta.env.NODE_ENV === 'development'` checks
 - ✅ Production build automatically removes console logs via Terser configuration
 - ✅ Error logging preserved for production debugging
 - ✅ Analytics logging properly configured for production

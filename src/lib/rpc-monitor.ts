@@ -38,7 +38,7 @@ export class RpcMonitor {
   async checkRpcHealth(url: string): Promise<RpcPerformanceData> {
     // Validate URL first
     if (!validateRpcUrl(url)) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`❌ Invalid RPC URL: ${url}`)
       }
       return {
@@ -55,17 +55,17 @@ export class RpcMonitor {
     
     // Check rate limiting
     if (!this.rateLimiter.isAllowed(url)) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`⏳ Rate limited for: ${url}`)
       }
       const cached = this.statusCache.get(url)
       if (cached) {
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.NODE_ENV === 'development') {
           console.log(`📋 Using cached result for: ${url}`)
         }
         return { ...cached, lastChecked: new Date() }
       }
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`❌ No cache available for rate limited: ${url}`)
       }
       return {
@@ -82,13 +82,13 @@ export class RpcMonitor {
     
     const cached = this.statusCache.get(url)
     if (cached && Date.now() - cached.lastChecked.getTime() < 300000) { // 5 minutes cache
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`📋 Using cached result (5min): ${url}`)
       }
       return { ...cached, lastChecked: new Date() }
     }
 
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.NODE_ENV === 'development') {
       console.log(`🔍 Testing RPC: ${url}`)
     }
     
@@ -135,7 +135,7 @@ export class RpcMonitor {
         this.statusCache.set(url, performanceData)
         this.updatePerformanceHistory(url, performanceData)
         
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.NODE_ENV === 'development') {
           console.log(`✅ RPC ${url} is ${status} (${latency}ms)`)
         }
         
@@ -144,7 +144,7 @@ export class RpcMonitor {
         throw new Error(`HTTP ${response.status}`)
       }
     } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`❌ RPC ${url} failed:`, error)
       }
       

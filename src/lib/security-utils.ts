@@ -253,7 +253,7 @@ export const SECURITY_HEADERS = {
 export function sanitizeError(error: unknown): string {
   if (error instanceof Error) {
     // In production, don't expose stack traces
-    if (process.env.NODE_ENV === 'production') {
+    if (import.meta.env.NODE_ENV === 'production') {
       return 'An error occurred. Please try again later.'
     }
     return error.message

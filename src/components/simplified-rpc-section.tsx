@@ -173,9 +173,9 @@ export const SimplifiedRpcSection = ({ chain }: SimplifiedRpcSectionProps) => {
               const { url, status, latency, endpoint: rpcEndpoint, score } = endpoint
               
               // Use environment variables for thresholds or fallback to defaults
-              const officialScoreThreshold = parseInt(process.env.OFFICIAL_RPC_SCORE_THRESHOLD || '100')
-              const recommendedScoreThreshold = parseInt(process.env.RECOMMENDED_RPC_SCORE_THRESHOLD || '50')
-              const topRecommendedCount = parseInt(process.env.TOP_RECOMMENDED_RPC_COUNT || '3')
+              const officialScoreThreshold = parseInt(import.meta.env.OFFICIAL_RPC_SCORE_THRESHOLD || '100')
+              const recommendedScoreThreshold = parseInt(import.meta.env.RECOMMENDED_RPC_SCORE_THRESHOLD || '50')
+              const topRecommendedCount = parseInt(import.meta.env.TOP_RECOMMENDED_RPC_COUNT || '3')
               
               const isOfficial = score >= officialScoreThreshold // Official RPCs get high points
               const isRecommended = index < topRecommendedCount && score > recommendedScoreThreshold // Top 3 with good scores

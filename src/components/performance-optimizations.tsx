@@ -237,7 +237,7 @@ export const usePerformanceMonitor = () => {
       const renderTime = end - start
       setMetrics(prev => ({ ...prev, renderTime }))
       
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`${name} render time:`, renderTime.toFixed(2), 'ms')
       }
     }
@@ -250,7 +250,7 @@ export const usePerformanceMonitor = () => {
       const interactionTime = end - start
       setMetrics(prev => ({ ...prev, interactionTime }))
       
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`${name} interaction time:`, interactionTime.toFixed(2), 'ms')
       }
     }
@@ -290,7 +290,7 @@ export class PerformanceErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.NODE_ENV === 'development') {
       console.error('Performance component error:', error, errorInfo)
     }
   }

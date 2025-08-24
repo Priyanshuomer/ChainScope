@@ -62,11 +62,11 @@ class Analytics {
     // Initialize Google Analytics if available and enabled
     if (typeof window !== 'undefined' && window.gtag && this.gaMeasurementId !== 'GA_MEASUREMENT_ID' && enableAnalytics) {
       this.isInitialized = true
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log('📊 Analytics initialized with Google Analytics')
       }
     } else if (typeof window !== 'undefined') {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         if (!enableAnalytics) {
           console.log('📊 Analytics disabled via environment variable')
         } else if (this.gaMeasurementId === 'GA_MEASUREMENT_ID') {
@@ -121,7 +121,7 @@ class Analytics {
     }
 
     // Log in development
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.NODE_ENV === 'development') {
       console.log('📊 Analytics Event:', event)
     }
   }
@@ -206,7 +206,7 @@ class Analytics {
     }
 
     // Log in development (only if verbose logging is enabled)
-    if (process.env.NODE_ENV === 'development' && import.meta.env.VITE_VERBOSE_LOGGING === 'true') {
+    if (import.meta.env.NODE_ENV === 'development' && import.meta.env.VITE_VERBOSE_LOGGING === 'true') {
       console.error('🚨 Error Tracked:', errorEvent)
     }
   }

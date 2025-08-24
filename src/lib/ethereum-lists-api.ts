@@ -111,7 +111,7 @@ export class EthereumListsAPI {
     const BATCH_SIZE = 5 // Process only 5 chains at a time
     const DELAY_BETWEEN_BATCHES = 1000 // 1 second delay between batches
     
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.NODE_ENV === 'development') {
       console.log(`🔄 Processing ${chainIds.length} chains in batches of ${BATCH_SIZE}`)
     }
     
@@ -133,12 +133,12 @@ export class EthereumListsAPI {
         await new Promise(resolve => setTimeout(resolve, DELAY_BETWEEN_BATCHES))
       }
       
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`✅ Processed batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(chainIds.length / BATCH_SIZE)}`)
       }
     }
     
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.NODE_ENV === 'development') {
       console.log(`🎉 Successfully fetched metadata for ${results.size}/${chainIds.length} chains`)
     }
     return results

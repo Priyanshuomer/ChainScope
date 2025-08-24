@@ -71,13 +71,13 @@ class ChainListAPI {
   async fetchChains(): Promise<ChainData[]> {
     // Return cached data if still valid
     if (this.chainsCache.length > 0 && Date.now() - this.cacheTimestamp < this.CACHE_DURATION) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`📦 Using cached chain data: ${this.chainsCache.length} chains`)
       }
       return this.chainsCache
     }
 
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.NODE_ENV === 'development') {
       console.log('🚀 Fetching fresh chain data from multiple sources...')
     }
 
@@ -109,7 +109,7 @@ class ChainListAPI {
     // Try each source with timeout and retries
     for (const source of dataSources) {
       try {
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.NODE_ENV === 'development') {
           console.log(`🔄 Trying ${source.name}...`)
         }
         const data = await this.fetchWithTimeout(source.url)
@@ -117,16 +117,16 @@ class ChainListAPI {
         if (data) {
           const parsed = await source.parser(data)
           if (parsed && parsed.length > 0) {
-            if (process.env.NODE_ENV === 'development') {
+            if (import.meta.env.NODE_ENV === 'development') {
               console.log(`✅ ${source.name}: ${parsed.length} chains loaded`)
             }
             allChains = this.mergeChainSources(allChains, parsed)
             successfulSources++
             
             // If we have enough data from high-priority sources, break early
-            const minChainsThreshold = parseInt(process.env.MIN_CHAINS_THRESHOLD || '50')
+            const minChainsThreshold = parseInt(import.meta.env.MIN_CHAINS_THRESHOLD || '50')
             if (source.priority <= 2 && allChains.length >= minChainsThreshold) {
-              if (process.env.NODE_ENV === 'development') {
+              if (import.meta.env.NODE_ENV === 'development') {
                 console.log(`🎯 Sufficient data obtained from high-priority source`)
               }
               break
@@ -134,7 +134,7 @@ class ChainListAPI {
           }
         }
       } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.NODE_ENV === 'development') {
           const errorMessage = error instanceof Error ? error.message : 'Unknown error'
           if (errorMessage.includes('CORS') || errorMessage.includes('blocked')) {
             console.warn(`⚠️ ${source.name} failed due to CORS policy:`, errorMessage)
@@ -148,7 +148,7 @@ class ChainListAPI {
 
     // Validate and cache results
     if (allChains.length > 0) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`🎉 Successfully loaded ${allChains.length} chains from ${successfulSources} sources`)
       }
       this.chainsCache = this.sortAndValidateChains(allChains)
@@ -157,7 +157,7 @@ class ChainListAPI {
     }
 
     // Emergency fallback to expanded local dataset
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.NODE_ENV === 'development') {
       console.warn('⚠️ All external sources failed, using comprehensive fallback dataset')
       console.log(`📦 Fallback dataset: ${expandedFallbackChains.length} verified chains`)
     }
@@ -196,7 +196,7 @@ class ChainListAPI {
 
         return await response.json()
       } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.NODE_ENV === 'development') {
           console.warn(`🔄 Attempt ${attempt}/${retries} failed for ${url}:`, error instanceof Error ? error.message : 'Unknown error')
         }
         
@@ -261,7 +261,7 @@ class ChainListAPI {
   private async parseDefiLlamaResponse(data: DefiLlamaResponse[]): Promise<ChainData[]> {
     if (!Array.isArray(data)) return []
 
-    const minTvlThreshold = parseInt(process.env.MIN_TVL_THRESHOLD || '1000000')
+    const minTvlThreshold = parseInt(import.meta.env.MIN_TVL_THRESHOLD || '1000000')
 
     return data
       .filter(chain => chain.chainId && chain.name && chain.chainId > 0)
@@ -548,7 +548,7 @@ class ChainListAPI {
     const shortName = chain.shortName?.toLowerCase() || ''
     const network = chain.network?.toLowerCase() || ''
     
-    const testnetChainIdThreshold = parseInt(process.env.TESTNET_CHAIN_ID_THRESHOLD || '1000000')
+    const testnetChainIdThreshold = parseInt(import.meta.env.TESTNET_CHAIN_ID_THRESHOLD || '1000000')
     
     return testnetKeywords.some(keyword => 
       name.includes(keyword) || 
@@ -562,7 +562,7 @@ class ChainListAPI {
    */
   private detectVerified(chain: ChainListAPIResponse): boolean {
     // Use environment variable for trusted chain IDs or fallback to common ones
-    const trustedChainIdsEnv = process.env.TRUSTED_CHAIN_IDS
+    const trustedChainIdsEnv = import.meta.env.TRUSTED_CHAIN_IDS
     const trustedChainIds = trustedChainIdsEnv 
       ? trustedChainIdsEnv.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id))
       : [1, 10, 25, 56, 100, 137, 250, 324, 1101, 8453, 42161, 43114, 42220]
@@ -1048,7 +1048,7 @@ class ChainListAPI {
   clearCache(): void {
     this.chainsCache = []
     this.cacheTimestamp = 0
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.NODE_ENV === 'development') {
       console.log('🗑️ Chain cache cleared')
     }
   }

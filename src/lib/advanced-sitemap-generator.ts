@@ -81,7 +81,7 @@ class AdvancedSitemapGenerator {
     const now = new Date().toISOString()
     
     // Use environment variable for network count or fallback to dynamic text
-    const networkCount = process.env.NETWORK_COUNT || '2000+'
+    const networkCount = import.meta.env.NETWORK_COUNT || '2000+'
     
     const entries: SitemapEntry[] = [
       {
@@ -148,7 +148,7 @@ class AdvancedSitemapGenerator {
    */
   public generatePopularChainsSitemap(chains: MergedChainData[]): string {
     // Use environment variable for popular chain IDs or fallback to common ones
-    const popularChainIdsEnv = process.env.POPULAR_CHAIN_IDS
+    const popularChainIdsEnv = import.meta.env.POPULAR_CHAIN_IDS
     const popularChainIds = popularChainIdsEnv 
       ? popularChainIdsEnv.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id))
       : [1, 137, 42161, 10, 56, 43114, 8453, 59144, 100, 250, 324, 1101, 42220]

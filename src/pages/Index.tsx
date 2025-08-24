@@ -48,17 +48,17 @@ const Index = () => {
   
   // Dynamic scoring system based on environment variables
   const calculateChainScore = React.useCallback((chain: MergedChainData) => {
-    const popularScore = parseInt(process.env.POPULAR_CHAIN_SCORE || '1000')
-    const verifiedScore = parseInt(process.env.VERIFIED_CHAIN_SCORE || '500')
-    const rpcMultiplier = parseInt(process.env.RPC_MULTIPLIER || '10')
-    const mainnetScore = parseInt(process.env.MAINNET_SCORE || '200')
-    const l2Score = parseInt(process.env.L2_SCORE || '100')
+    const popularScore = parseInt(import.meta.env.POPULAR_CHAIN_SCORE || '1000')
+    const verifiedScore = parseInt(import.meta.env.VERIFIED_CHAIN_SCORE || '500')
+    const rpcMultiplier = parseInt(import.meta.env.RPC_MULTIPLIER || '10')
+    const mainnetScore = parseInt(import.meta.env.MAINNET_SCORE || '200')
+    const l2Score = parseInt(import.meta.env.L2_SCORE || '100')
     
     let score = 0
     
     // Popular chains get bonus
-    const popularChainIds = process.env.POPULAR_CHAIN_IDS 
-      ? process.env.POPULAR_CHAIN_IDS.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id))
+    const popularChainIds = import.meta.env.POPULAR_CHAIN_IDS 
+      ? import.meta.env.POPULAR_CHAIN_IDS.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id))
       : [1, 137, 42161, 10, 56, 43114, 250, 100, 8453, 59144, 534353, 999]
     
     if (popularChainIds.includes(chain.chainId)) {
@@ -99,7 +99,7 @@ const Index = () => {
           await chainDataMerger.updatePopularChainsRpcHealth()
         } catch (error) {
           // Silently fail - this is background work
-          if (process.env.NODE_ENV === 'development') {
+          if (import.meta.env.NODE_ENV === 'development') {
             console.warn('Background RPC update failed:', error)
           }
         }

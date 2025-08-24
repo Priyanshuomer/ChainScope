@@ -48,7 +48,7 @@ export class ErrorBoundary extends Component<Props, State> {
             <p className="text-muted-foreground max-w-md">
               An unexpected error occurred. This is likely a temporary issue.
             </p>
-            {this.state.error && process.env.NODE_ENV === 'development' && (
+            {this.state.error && import.meta.env.NODE_ENV === 'development' && (
               <details className="text-xs text-muted-foreground mt-4">
                 <summary className="cursor-pointer hover:text-foreground">Error details</summary>
                 <pre className="mt-2 p-2 bg-muted rounded text-left">

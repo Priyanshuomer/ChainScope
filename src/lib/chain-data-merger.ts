@@ -17,7 +17,7 @@ export class ChainDataMerger {
 
   async fetchMergedChains(): Promise<MergedChainData[]> {
     try {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log('🔄 Starting chain data merge process...')
       }
       
@@ -25,32 +25,32 @@ export class ChainDataMerger {
       const [chainListData, ethereumListsMetadata] = await Promise.allSettled([
         chainListAPI.fetchChains(),
         // CRITICAL FIX: Skip heavy metadata fetching in development to prevent resource exhaustion
-        process.env.NODE_ENV === 'development' ? Promise.resolve(new Map()) : this.fetchAllEthereumListsMetadata()
+        import.meta.env.NODE_ENV === 'development' ? Promise.resolve(new Map()) : this.fetchAllEthereumListsMetadata()
       ])
 
       const chains = chainListData.status === 'fulfilled' ? chainListData.value : []
       const metadata = ethereumListsMetadata.status === 'fulfilled' ? ethereumListsMetadata.value : new Map()
 
       if (chainListData.status === 'rejected') {
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.NODE_ENV === 'development') {
           console.error('❌ ChainList API failed:', chainListData.reason)
         }
       }
       
       if (ethereumListsMetadata.status === 'rejected') {
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.NODE_ENV === 'development') {
           console.warn('⚠️ Ethereum Lists API failed, proceeding without enhanced metadata:', ethereumListsMetadata.reason)
         }
       }
 
       // Development mode optimization message
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log('🔧 Development mode: Skipped heavy metadata fetching to prevent resource exhaustion')
       }
 
       // Validate chains data with immediate fallback
       if (!Array.isArray(chains) || chains.length === 0) {
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.NODE_ENV === 'development') {
           console.error('❌ No valid chain data from APIs, using built-in fallback...')
         }
         
@@ -59,13 +59,13 @@ export class ChainDataMerger {
           const { fallbackChains } = await import('@/data/fallbackChains')
           
           if (!fallbackChains || fallbackChains.length === 0) {
-            if (process.env.NODE_ENV === 'development') {
+            if (import.meta.env.NODE_ENV === 'development') {
               console.error('❌ Fallback chains are empty!')
             }
             return this.getMinimalFallbackChains()
           }
           
-          if (process.env.NODE_ENV === 'development') {
+          if (import.meta.env.NODE_ENV === 'development') {
             console.log(`✅ Emergency fallback loaded: ${fallbackChains.length} chains`)
           }
           
@@ -89,7 +89,7 @@ export class ChainDataMerger {
           
           return emergencyMerged
         } catch (error) {
-          if (process.env.NODE_ENV === 'development') {
+          if (import.meta.env.NODE_ENV === 'development') {
             console.error('❌ Failed to load fallback chains:', error)
           }
           return this.getMinimalFallbackChains()
@@ -97,13 +97,13 @@ export class ChainDataMerger {
       }
 
       // Don't show backend processing details to users in production
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`📊 Processing ${chains.length} chains with ${metadata.size} metadata entries`)
       }
 
       // Process chains quickly for initial load WITHOUT RPC testing
       const mergedChains: MergedChainData[] = []
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`🚀 Creating basic merged chains for fast initial load...`)
       }
       
@@ -114,7 +114,7 @@ export class ChainDataMerger {
           const mergedChain = this.createFastMergedChain(chain, chainMetadata)
           mergedChains.push(mergedChain)
         } catch (error) {
-          if (process.env.NODE_ENV === 'development') {
+          if (import.meta.env.NODE_ENV === 'development') {
             console.warn(`⚠️ Failed to merge data for chain ${chain.chainId}:`, error)
           }
           const fallbackChain = this.createFallbackChain(chain)
@@ -122,14 +122,14 @@ export class ChainDataMerger {
         }
       }
 
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`✅ Successfully merged data for ${mergedChains.length} chains`)
       }
       
       // Smart sorting: data quality and importance first
       return this.sortChainsByQuality(mergedChains)
     } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.error('❌ Critical error in chain data merger:', error)
       }
       // Return minimal fallback data instead of empty array to prevent app crash
@@ -198,22 +198,22 @@ export class ChainDataMerger {
       const chains = await chainListAPI.fetchChains()
       
       // CRITICAL FIX: Only process popular/verified chains to prevent resource exhaustion
-      const maxMetadataChains = parseInt(process.env.MAX_METADATA_CHAINS || '50')
-      const maxChainId = parseInt(process.env.MAX_CHAIN_ID || '10000')
+      const maxMetadataChains = parseInt(import.meta.env.MAX_METADATA_CHAINS || '50')
+      const maxChainId = parseInt(import.meta.env.MAX_CHAIN_ID || '10000')
       
       const popularChainIds = chains
         .filter(chain => (chain.verified || chain.chainId <= 1000) && chain.chainId <= maxChainId)
         .slice(0, maxMetadataChains)
         .map(c => c.chainId)
       
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`🔄 Fetching metadata for ${popularChainIds.length} popular chains (out of ${chains.length} total)`)
       }
       
       // Fetch metadata for popular chains only
       return await ethereumListsAPI.fetchMultipleChainMetadata(popularChainIds)
     } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.warn('⚠️ Failed to fetch Ethereum Lists metadata:', error)
       }
       return new Map()
@@ -384,7 +384,7 @@ export class ChainDataMerger {
   private async testRpcSample(rpcUrls: string[]): Promise<RpcEndpoint[]> {
     if (rpcUrls.length === 0) return []
     
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.NODE_ENV === 'development') {
       console.log(`🔍 Testing ${rpcUrls.length} RPC endpoints for chain...`)
     }
     
@@ -395,14 +395,14 @@ export class ChainDataMerger {
         ? rpcUrls.slice(0, maxTestCount) 
         : rpcUrls
       
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`📊 Testing sample of ${urlsToTest.length} out of ${rpcUrls.length} RPCs`)
       }
       
       const rpcMonitor = RpcMonitor.getInstance()
       const testedResults = await rpcMonitor.testMultipleRpcs(urlsToTest)
       
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`✅ RPC testing completed:`, {
           total: rpcUrls.length,
           tested: testedResults.length,
@@ -420,7 +420,7 @@ export class ChainDataMerger {
       // Otherwise, expand results for untested RPCs
       return this.expandRpcResults(testedResults, rpcUrls)
     } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.warn('❌ RPC testing failed:', error)
       }
       // Return offline status for all RPCs when testing fails
@@ -771,11 +771,11 @@ export class ChainDataMerger {
       chain.rpcHealth = rpcHealth
       chain.lastUpdated = new Date()
 
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.log(`✅ Updated RPC health for chain ${chainId}`)
       }
     } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.NODE_ENV === 'development') {
         console.warn(`⚠️ Failed to update RPC health for chain ${chainId}:`, error)
       }
     }
@@ -784,17 +784,17 @@ export class ChainDataMerger {
   // Update RPC health for popular chains in background
   async updatePopularChainsRpcHealth(): Promise<void> {
     // Use environment variable for popular chain IDs or fallback to common ones
-    const popularChainIdsEnv = process.env.POPULAR_CHAIN_IDS
+    const popularChainIdsEnv = import.meta.env.POPULAR_CHAIN_IDS
     const popularChainIds = popularChainIdsEnv 
       ? popularChainIdsEnv.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id))
       : [1, 137, 42161, 10, 56, 43114, 250, 100, 1101, 8453] // Ethereum, Polygon, Arbitrum, etc.
     
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.NODE_ENV === 'development') {
       console.log('🔄 Updating RPC health for popular chains...')
     }
 
     // Update in parallel with limited concurrency
-    const batchSize = parseInt(process.env.RPC_UPDATE_BATCH_SIZE || '3')
+    const batchSize = parseInt(import.meta.env.RPC_UPDATE_BATCH_SIZE || '3')
     for (let i = 0; i < popularChainIds.length; i += batchSize) {
       const batch = popularChainIds.slice(i, i + batchSize)
       await Promise.allSettled(
@@ -803,12 +803,12 @@ export class ChainDataMerger {
       
       // Small delay between batches to avoid overwhelming
       if (i + batchSize < popularChainIds.length) {
-        const delayMs = parseInt(process.env.RPC_UPDATE_DELAY_MS || '1000')
+        const delayMs = parseInt(import.meta.env.RPC_UPDATE_DELAY_MS || '1000')
         await new Promise(resolve => setTimeout(resolve, delayMs))
       }
     }
 
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.NODE_ENV === 'development') {
       console.log('✅ Popular chains RPC health update completed')
     }
   }
@@ -818,7 +818,7 @@ export class ChainDataMerger {
     const chains = await this.fetchMergedChains()
     
     // Use environment variable for popular chain IDs or fallback to common ones
-    const popularChainIdsEnv = process.env.POPULAR_CHAIN_IDS
+    const popularChainIdsEnv = import.meta.env.POPULAR_CHAIN_IDS
     const popularChainIds = popularChainIdsEnv 
       ? popularChainIdsEnv.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id))
       : [1, 137, 42161, 10, 56, 43114, 250, 100, 1101, 8453]
