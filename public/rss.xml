@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ChainScope - Latest Blockchain Updates</title>
+    <link>https://chainscope.dev</link>
+    <description>Blockchain network updates, RPC endpoints & stats</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 25 Aug 2025 20:31:43 GMT</lastBuildDate>
+    <atom:link href="https://chainscope.dev/rss.xml" rel="self" type="application/rss+xml" />
+
+  <item>
+    <title>Ethereum (Chain ID: 1)</title>
+    <link>https://chainscope.dev/chain/1</link>
+    <guid>https://chainscope.dev/chain/1</guid>
+    <pubDate>Wed, 20 Aug 2025 12:00:00 GMT</pubDate>
+    <description>Latest info about Ethereum including RPC endpoints, stats, and more.</description>
+  </item>
+
+  <item>
+    <title>Bitcoin (Chain ID: 2)</title>
+    <link>https://chainscope.dev/chain/2</link>
+    <guid>https://chainscope.dev/chain/2</guid>
+    <pubDate>Fri, 22 Aug 2025 16:00:00 GMT</pubDate>
+    <description>Latest info about Bitcoin including RPC endpoints, stats, and more.</description>
+  </item>
+
+  <item>
+    <title>Polygon (Chain ID: 137)</title>
+    <link>https://chainscope.dev/chain/137</link>
+    <guid>https://chainscope.dev/chain/137</guid>
+    <pubDate>Sun, 24 Aug 2025 18:30:00 GMT</pubDate>
+    <description>Latest info about Polygon including RPC endpoints, stats, and more.</description>
+  </item>
+  </channel>
+</rss>

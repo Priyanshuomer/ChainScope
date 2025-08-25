@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://chainscope.dev/chain/1</loc>
+    <lastmod>2025-08-20T12:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    
+    <image:image>
+      <image:loc>https://chainscope.dev/images/chains/1.png</image:loc>
+      <image:title>Ethereum</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://chainscope.dev/chain/2</loc>
+    <lastmod>2025-08-22T16:00:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    
+    <image:image>
+      <image:loc>https://chainscope.dev/images/chains/2.png</image:loc>
+      <image:title>Bitcoin</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://chainscope.dev/chain/137</loc>
+    <lastmod>2025-08-24T18:30:00Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    
+    <image:image>
+      <image:loc>https://chainscope.dev/images/chains/137.png</image:loc>
+      <image:title>Polygon</image:title>
+    </image:image>
+  </url>
+</urlset>
