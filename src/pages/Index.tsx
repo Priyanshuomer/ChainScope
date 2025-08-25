@@ -271,7 +271,7 @@ const Index = () => {
                 className="mb-4 sm:mb-6"
               />
               
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center">
+              {/* <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center">
                   <NetworkFilters
                   selectedFilters={selectedFilters}
                   onFilterChange={handleFilterChange}
@@ -307,7 +307,49 @@ const Index = () => {
                     </TooltipContent>
                   </Tooltip>
                 </div>
-              </div>
+              </div> */}
+              
+              <div className="flex flex-col gap-3 sm:gap-4 w-full">
+      <NetworkFilters
+    selectedFilters={selectedFilters}
+    onFilterChange={handleFilterChange}
+  />
+
+  <div className="flex justify-end">
+    <div className="flex items-center gap-2">
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant={viewMode === "grid" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setViewMode("grid")}
+          >
+            <Grid3X3 className="w-4 h-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Grid view - cards layout</p>
+        </TooltipContent>
+      </Tooltip>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant={viewMode === "list" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setViewMode("list")}
+          >
+            <List className="w-4 h-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>List view - compact layout</p>
+        </TooltipContent>
+      </Tooltip>
+    </div>
+  </div>
+</div>
+
+
             </div>
           </div>
           

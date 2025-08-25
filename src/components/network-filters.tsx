@@ -77,118 +77,164 @@ export const NetworkFilters = ({ selectedFilters, onFilterChange }: NetworkFilte
   }
 
   return (
-    <div className="space-y-4">
-      {/* Active Filters Display */}
-      {activeFilters.length > 0 && (
-        <div className="flex flex-wrap gap-2 items-center">
-          <span className="text-sm font-medium text-muted-foreground">Active filters:</span>
-          {activeFilters.map(filter => (
-            <Badge
-              key={filter.value}
-              variant="secondary"
-              className="flex items-center gap-1 px-2 py-1"
-            >
-              <span>{filter.label}</span>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-4 w-4 p-0 hover:bg-transparent"
-                onClick={() => handleRemoveFilter(filter.value)}
-              >
-                <X className="h-3 w-3" />
-              </Button>
-            </Badge>
-          ))}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleClearAll}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            Clear all
-          </Button>
-        </div>
-      )}
+    // <div className="space-y-4">
+    //   {/* Active Filters Display */}
+    //   {activeFilters.length > 0 && (
+    //     <div className="flex flex-wrap gap-2 items-center">
+    //       <span className="text-sm font-medium text-muted-foreground">Active filters:</span>
+    //       {activeFilters.map(filter => (
+    //         <Badge
+    //           key={filter.value}
+    //           variant="secondary"
+    //           className="flex items-center gap-1 px-2 py-1"
+    //         >
+    //           <span>{filter.label}</span>
+    //           <Button
+    //             variant="ghost"
+    //             size="sm"
+    //             className="h-4 w-4 p-0 hover:bg-transparent"
+    //             onClick={() => handleRemoveFilter(filter.value)}
+    //           >
+    //             <X className="h-3 w-3" />
+    //           </Button>
+    //         </Badge>
+    //       ))}
+    //       <Button
+    //         variant="ghost"
+    //         size="sm"
+    //         onClick={handleClearAll}
+    //         className="text-muted-foreground hover:text-foreground"
+    //       >
+    //         Clear all
+    //       </Button>
+    //     </div>
+    //   )}
 
-      {/* Filter Categories */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {filterCategories.map(category => (
-          <Card key={category.name} className="bg-gradient-card border-border/50">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-semibold flex items-center gap-2">
-                <Filter className="w-4 h-4" />
-                {category.name}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              {category.filters.map(filter => {
-                const isSelected = selectedFilters.includes(filter.value)
-                return (
-                  <Tooltip key={filter.value}>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant={isSelected ? "default" : "ghost"}
-                        size="sm"
-                        className="w-full justify-start text-xs h-8"
-                        onClick={() => handleFilterToggle(filter.value)}
-                      >
-                        <div className="flex items-center gap-2 w-full">
-                          <div className="flex-1 text-left">
-                            <div className="font-medium">{filter.label}</div>
-                            <div className="text-xs text-muted-foreground truncate">
-                              {filter.description}
-                            </div>
-                          </div>
-                          {isSelected && <Check className="w-3 h-3" />}
-                        </div>
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>{filter.description}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                )
-              })}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+    //   {/* Filter Categories */}
+    //   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    //     {filterCategories.map(category => (
+    //       <Card key={category.name} className="bg-gradient-card border-border/50">
+    //         <CardHeader className="pb-3">
+    //           <CardTitle className="text-sm font-semibold flex items-center gap-2">
+    //             <Filter className="w-4 h-4" />
+    //             {category.name}
+    //           </CardTitle>
+    //         </CardHeader>
+    //         <CardContent className="space-y-2">
+    //           {category.filters.map(filter => {
+    //             const isSelected = selectedFilters.includes(filter.value)
+    //             return (
+    //               <Tooltip key={filter.value}>
+    //                 <TooltipTrigger asChild>
+    //                   <Button
+    //                     variant={isSelected ? "default" : "ghost"}
+    //                     size="sm"
+    //                     className="w-full justify-start text-xs h-8"
+    //                     onClick={() => handleFilterToggle(filter.value)}
+    //                   >
+    //                     <div className="flex items-center gap-2 w-full">
+    //                       <div className="flex-1 text-left">
+    //                         <div className="font-medium">{filter.label}</div>
+    //                         <div className="text-xs text-muted-foreground truncate">
+    //                           {filter.description}
+    //                         </div>
+    //                       </div>
+    //                       {isSelected && <Check className="w-3 h-3" />}
+    //                     </div>
+    //                   </Button>
+    //                 </TooltipTrigger>
+    //                 <TooltipContent>
+    //                   <p>{filter.description}</p>
+    //                 </TooltipContent>
+    //               </Tooltip>
+    //             )
+    //           })}
+    //         </CardContent>
+    //       </Card>
+    //     ))}
+    //   </div>
 
-      {/* Quick Filter Presets */}
-      <div className="flex flex-wrap gap-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => onFilterChange(['mainnet', 'verified'])}
-          className="text-xs"
-        >
-          Popular Mainnets
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => onFilterChange(['L2', 'active'])}
-          className="text-xs"
-        >
-          Active L2s
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => onFilterChange(['testnet', 'faucet'])}
-          className="text-xs"
-        >
-          Testnets with Faucets
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => onFilterChange(['bridge', 'evm-compatible'])}
-          className="text-xs"
-        >
-          Bridge Networks
-        </Button>
-      </div>
-    </div>
+    //   {/* Quick Filter Presets */}
+    //   <div className="flex flex-wrap gap-2">
+    //     <Button
+    //       variant="outline"
+    //       size="sm"
+    //       onClick={() => onFilterChange(['mainnet', 'verified'])}
+    //       className="text-xs"
+    //     >
+    //       Popular Mainnets
+    //     </Button>
+    //     <Button
+    //       variant="outline"
+    //       size="sm"
+    //       onClick={() => onFilterChange(['L2', 'active'])}
+    //       className="text-xs"
+    //     >
+    //       Active L2s
+    //     </Button>
+    //     <Button
+    //       variant="outline"
+    //       size="sm"
+    //       onClick={() => onFilterChange(['testnet', 'faucet'])}
+    //       className="text-xs"
+    //     >
+    //       Testnets with Faucets
+    //     </Button>
+    //     <Button
+    //       variant="outline"
+    //       size="sm"
+    //       onClick={() => onFilterChange(['bridge', 'evm-compatible'])}
+    //       className="text-xs"
+    //     >
+    //       Bridge Networks
+    //     </Button>
+    //   </div>
+    // </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-[1600px] mx-auto px-4">
+  {filterCategories.map(category => (
+    <Card
+      key={category.name}
+      className="bg-gradient-card border-border/50 min-w-[280px] flex flex-col"
+    >
+      <CardHeader className="pb-3">
+        <CardTitle className="text-sm font-semibold flex items-center gap-2">
+          <Filter className="w-4 h-4" />
+          {category.name}
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-2">
+        {category.filters.map(filter => {
+          const isSelected = selectedFilters.includes(filter.value)
+          return (
+            <Tooltip key={filter.value}>
+              <TooltipTrigger asChild>
+                <Button
+                  variant={isSelected ? "default" : "ghost"}
+                  size="sm"
+                  className="w-full justify-start text-xs h-auto py-2"
+                  onClick={() => handleFilterToggle(filter.value)}
+                >
+                  <div className="flex items-center gap-2 w-full">
+                    <div className="flex-1 text-left">
+                      <div className="font-medium">{filter.label}</div>
+                      <div className="text-xs text-muted-foreground break-words">
+                        {filter.description}
+                      </div>
+                    </div>
+                    {isSelected && <Check className="w-3 h-3" />}
+                  </div>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{filter.description}</p>
+              </TooltipContent>
+            </Tooltip>
+          )
+        })}
+      </CardContent>
+    </Card>
+  ))}
+</div>
+
   )
 }

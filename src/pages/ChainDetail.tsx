@@ -201,6 +201,45 @@ const ChainDetail = () => {
   }
   
   const faqData = generateFAQData(chain)
+
+  const calculateHealthScore = () => {
+  // Check if rpcHealth exists and has at least one defined metric
+  if (
+    !chain.rpcHealth || (
+      chain.rpcHealth.averageLatency === undefined &&
+      chain.rpcHealth.reliabilityScore === undefined &&
+      chain.rpcHealth.privacyScore === undefined
+    )
+  ) {
+    return 0
+  }
+
+  // Destructure with default fallbacks
+  const {
+    averageLatency = 1000, // high latency = bad by default
+    reliabilityScore = 0,
+    privacyScore = 0,
+  } = chain.rpcHealth
+
+  // Normalize latency to a 0-100 score (lower latency is better)
+  const latencyScore = Math.max(0, Math.min(1, (1000 - averageLatency) / 1000)) * 100
+
+  // Weight how important each metric is
+  const weights = {
+    reliability: 0.5,
+    latency: 0.3,
+    privacy: 0.2,
+  }
+
+  // Compute weighted composite score
+  const score =
+    reliabilityScore * weights.reliability +
+    latencyScore * weights.latency +
+    privacyScore * weights.privacy
+
+  // Clamp and round score to 0-100
+  return Math.round(Math.max(0, Math.min(100, score)))
+}
   
   return (
     <>
@@ -300,6 +339,44 @@ const ChainDetail = () => {
             </CardContent>
           </Card>
         </div>
+
+
+ 
+
+    <div className="mb-6">
+  <Card className="bg-gradient-card border-border/50">
+    <CardContent className="p-4">
+      <span className="text-sm text-muted-foreground">RPC Performance</span>
+      <div className="mt-3 w-full h-6 bg-gray-200/50 backdrop-blur-md rounded-full overflow-hidden relative shadow-inner border border-gray-300">
+        <div
+          className="h-full rounded-full transition-all duration-700 ease-in-out"
+          style={{
+            width: `${Math.min(calculateHealthScore() || 0, 100)}%`,
+            background: `linear-gradient(90deg,
+              ${calculateHealthScore() >= 70 ? '#22c55e' : calculateHealthScore() >= 40 ? '#facc15' : '#ef4444'},
+              ${calculateHealthScore() >= 70 ? '#4ade80' : calculateHealthScore() >= 40 ? '#fde047' : '#f87171'})`,
+            boxShadow: '0 0 10px rgba(0,0,0,0.1), inset 0 1px 3px rgba(255,255,255,0.4)'
+          }}
+        />
+      </div>
+      <p className="text-sm font-medium mt-2 text-center text-muted-foreground">
+        {Math.min(calculateHealthScore() || 0, 100)} / 100
+      </p>
+    </CardContent>
+  </Card>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
         {/* Main Content Area - Tabs and Sidebar */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
