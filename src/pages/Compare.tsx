@@ -59,6 +59,13 @@ const Compare = () => {
   const [loadingPerformance, setLoadingPerformance] = useState(false)
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({})
 
+
+  const [expanded, setExpanded] = useState(false);
+
+
+  
+
+
   // Get chains from URL params
   useEffect(() => {
     const chainIds = searchParams.get('chains')?.split(',').map(id => parseInt(id)).filter(id => !isNaN(id)) || []
@@ -400,25 +407,40 @@ const Compare = () => {
               </td>
             ))}
           </tr>
-          <tr className="border-b border-border/50">
-            <td className="p-4 font-medium bg-muted/30">Tags</td>
-            {selectedChains.map(chain => (
-              <td key={chain.chainId} className="p-4">
-                <div className="flex flex-wrap gap-1">
-                  {chain.tags?.slice(0, 3).map((tag, index) => (
-                    <Badge key={index} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                  {chain.tags && chain.tags.length > 3 && (
-                    <Badge variant="outline" className="text-xs">
-                      +{chain.tags.length - 3} more
-                    </Badge>
-                  )}
-                </div>
-              </td>
-            ))}
-          </tr>
+           
+            <tr className="border-b border-border/50">
+  <td className="p-4 font-medium bg-muted/30">Tags</td>
+  {selectedChains.map(chain => {
+    const visibleTags = expanded ? chain.tags : chain.tags.slice(0, 3);
+    return (
+      <td key={chain.chainId} className="p-4">
+        <div className="flex flex-wrap gap-1 items-center">
+          {visibleTags.map((tag, index) => (
+            <Badge key={index} variant="outline" className="text-xs">
+              {tag}
+            </Badge>
+          ))}
+
+          {chain.tags.length > 3 && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-xs p-0 h-auto"
+              onClick={() => setExpanded(!expanded)}
+            >
+              {expanded ? "Show Less" : `+${chain.tags.length - 3} more`}
+            </Button>
+          )}
+        </div>
+      </td>
+    );
+  })}
+</tr>
+
+
+
+
+
                      <tr className="border-b border-border/50">
              <td className="p-4 font-medium bg-muted/30">Red Flags</td>
              {selectedChains.map(chain => (

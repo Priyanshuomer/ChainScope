@@ -63,7 +63,7 @@ function App() {
     
     const handleLoad = () => {
       const loadTime = performance.now() - startTime
-      performanceMonitor.trackPageLoad(loadTime)
+      performanceMonitor.trackPageLoad()
       analytics.trackPageView(window.location.pathname)
     }
 
