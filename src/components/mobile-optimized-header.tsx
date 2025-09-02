@@ -12,6 +12,8 @@ import {
 import { Logo } from "./logo"
 import { WalletConnectButton } from "./wallet-connect-button"  // ✅ Import WalletConnectButton
 
+import ConnectWalletButton from "./connectWallet"
+
 export const MobileOptimizedHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const location = useLocation()
@@ -93,7 +95,7 @@ export const MobileOptimizedHeader = () => {
 
           {/* ✅ Desktop Actions - Replaced Contact & Settings with WalletConnectButton */}
           <div className="hidden md:flex items-center space-x-2">
-            <WalletConnectButton />
+            <ConnectWalletButton />
           </div>
 
           {/* Mobile Menu Button */}
@@ -138,7 +140,7 @@ export const MobileOptimizedHeader = () => {
 
               {/* ✅ Add WalletConnectButton in Mobile Menu too */}
               <div className="pt-4 border-t border-border">
-                <WalletConnectButton />
+                <ConnectWalletButton />
               </div>
             </div>
           </div>

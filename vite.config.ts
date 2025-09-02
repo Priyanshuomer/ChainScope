@@ -1,12 +1,15 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import viteCompression from 'vite-plugin-compression';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "localhost",
+    host: "0.0.0.0",
     port: 8080,
+     allowedHosts: ['.ngrok-free.app'],
     hmr: {
       protocol: 'ws',
       host: 'localhost',
@@ -48,6 +51,12 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
+        viteCompression({
+      algorithm: 'brotliCompress', // Best compression for modern browsers
+      ext: '.br',                  // Output file extension
+      deleteOriginFile: false      // Keep original files (optional)
+    }),
+    visualizer({ open: true })
   ],
   resolve: {
     alias: {

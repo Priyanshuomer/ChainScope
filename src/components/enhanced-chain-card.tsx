@@ -266,8 +266,8 @@ const calculateHealthScore = () => {
           </div> */}
           {/* <Progress value={healthScore} className="h-2" /> */}
           <div className="flex items-center space-x-2 text-xs text-muted-foreground">
-            <Wifi className="w-3 h-3" />
-            <span>{chain.rpc?.length || 0} endpoints</span>
+            {/* <Wifi className="w-3 h-3" /> */}
+            {/* <span>{chain.rpc?.length || 0} endpoints</span> */}
           </div>
         </div>
 
