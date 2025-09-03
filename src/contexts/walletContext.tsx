@@ -12,7 +12,7 @@ interface WalletContextProps {
   connecting: boolean;
   connectedWallet: string | null;
   setConnectedWallet: (wallet: string | null) => void;
-  pair: (uri: string) => Promise<void>;
+  pair: (uri: string) => Promise<string[]>; // 🔹 returns accounts
   disconnect: () => Promise<void>;
 }
 
@@ -38,16 +38,20 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
 
       setWalletkit(wallet);
 
+      // Show QR when pairing
       (wallet as any).on("display_uri", (uri: string) => {
         QRCodeModal.open(uri, () => {
           QRCodeModal.close();
         });
       });
 
+      // Handle approved session
       wallet.on("session_proposal", async (proposal) => {
         const namespaces = {
           eip155: {
-            accounts: ["eip155:1:0x0000000000000000000000000000000000000000"],
+            accounts: [
+              "eip155:1:0x0000000000000000000000000000000000000000",
+            ],
             methods: ["eth_sendTransaction", "personal_sign", "eth_signTypedData"],
             events: ["accountsChanged", "chainChanged"],
           },
@@ -62,6 +66,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         QRCodeModal.close();
       });
 
+      // Handle disconnect
       wallet.on("session_delete", () => {
         setSession(null);
       });
@@ -70,12 +75,28 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     initWallet();
   }, []);
 
-  const pair = async (uri: string) => {
-    if (walletkit) {
-      setConnecting(true);
-      await walletkit.pair({ uri });
-      setConnecting(false);
-    }
+  // 🔹 Pair and return accounts
+  const pair = async (uri: string): Promise<string[]> => {
+    if (!walletkit) return [];
+    setConnecting(true);
+
+    await walletkit.pair({ uri });
+
+    // Wait until session is available
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+        if (session?.namespaces?.eip155?.accounts?.length) {
+          clearInterval(interval);
+          setConnecting(false);
+
+          // Map to plain addresses (remove "eip155:1:")
+          const accounts = session.namespaces.eip155.accounts.map((acc: string) =>
+            acc.split(":").pop()!
+          );
+          resolve(accounts);
+        }
+      }, 500);
+    });
   };
 
   const disconnect = async () => {

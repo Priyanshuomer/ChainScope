@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Separator } from "@/components/ui/separator"
+import { ConnectWalletButton } from "@/components/connectWallet"
 import { 
   ArrowLeft, 
   ExternalLink, 
@@ -512,26 +513,36 @@ const ChainDetail = () => {
                       title: "Wallet Not Connected",
                       description: "Please connect your wallet first, then try adding the network.",
                       variant: "destructive",
-                      action: (
-                        <ToastAction altText="Connect Wallet" onClick={async () => {
-                          try {
-                            await (window as any).ethereum.request({ method: 'eth_requestAccounts' })
-                            toast({
-                              title: "Wallet Connected",
-                              description: "Your wallet is now connected. Try adding the network again.",
-                            })
-                          } catch {
-                            toast({
-                              title: "Connection Failed",
-                              description: "Please connect your wallet manually and try again.",
-                              variant: "destructive"
-                            })
-                          }
-                        }}>
-                          Connect
-                        </ToastAction>
-                      )
-                    })
+                    //   action: (
+
+                    //     //  <ConnectWalletButton />
+
+                    //     // <ToastAction altText="Connect Wallet" onClick={async () => {
+                    //     //   try {
+                    //     //     await (window as any).ethereum.request({ method: 'eth_requestAccounts' })
+                    //     //     toast({
+                    //     //       title: "Wallet Connected",
+                    //     //       description: "Your wallet is now connected. Try adding the network again.",
+                    //     //     })
+                    //     //   } catch {
+                    //     //     toast({
+                    //     //       title: "Connection Failed",
+                    //     //       description: "Please connect your wallet manually and try again.",
+                    //     //       variant: "destructive"
+                    //     //     })
+                    //     //   }
+                    //     // }}>
+                    //     //   Connect
+                    //     // </ToastAction>
+
+
+                    // //     <ToastAction altText="Connect Wallet">
+                    // //   <ConnectWalletButton />
+                    // // </ToastAction>
+
+
+                    //   // )
+                     })
                     return
                   }
 
@@ -540,6 +551,7 @@ const ChainDetail = () => {
                   toast({
                     title: "Network Added Successfully!",
                     description: `${chain.name} has been added to your wallet with the best available RPC endpoints.`,
+                    variant: "success"
                   })
                   
                 } catch (error: any) {
@@ -558,8 +570,9 @@ const ChainDetail = () => {
                     })
                   } else if (error.code === -32000 || error.message?.includes('already exists') || error.message?.includes('already added')) {
                     toast({
-                      title: "Network Already Added",
-                      description: `${chain.name} is already in your wallet.`,
+                      title: "Network Added",
+                      description: `${chain.name} is added in your wallet.`,
+                      variant: "success"
                     })
                   } else if (error.message?.includes('No official or reliable RPC endpoints')) {
                     toast({

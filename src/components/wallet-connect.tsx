@@ -35,6 +35,7 @@ export function WalletConnect({ chain }: WalletConnectProps) {
         toast({
           title: "Network Added!",
           description: `${chain.name} has been added to your wallet.`,
+          variant: "success",
         })
         setTimeout(() => setIsAdded(false), 3000)
       } else {

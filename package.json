@@ -69,6 +69,7 @@
     "ethers": "^6.15.0",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
+    "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
@@ -87,6 +88,7 @@
   "devDependencies": {
     "@types/bun": "^1.2.20",
     "@types/node": "^22.10.2",
+    "@types/qrcode.react": "^3.0.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@typescript-eslint/eslint-plugin": "^8.39.0",

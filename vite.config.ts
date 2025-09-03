@@ -56,7 +56,7 @@ export default defineConfig(({ mode }) => ({
       ext: '.br',                  // Output file extension
       deleteOriginFile: false      // Keep original files (optional)
     }),
-    visualizer({ open: true })
+    // visualizer({ open: true })
   ],
   resolve: {
     alias: {

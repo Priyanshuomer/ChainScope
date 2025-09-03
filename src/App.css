@@ -33,6 +33,11 @@
   }
 }
 
+.toast-default {
+  background-color: #16a34a; /* green-600 */
+  color: white;
+}
+
 .card {
   padding: 2em;
 }

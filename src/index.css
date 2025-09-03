@@ -110,6 +110,11 @@ h2 {
   line-height: 2.25rem;
 }
 
+.toast-default {
+  background-color: #16a34a; /* green-600 */
+  color: white;
+}
+
 h3 {
   font-size: 1.5rem;
   line-height: 2rem;

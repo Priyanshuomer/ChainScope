@@ -55,6 +55,7 @@ export function ChainCard({ chain, className }: ChainCardProps) {
       toast({
         title: "Network Added Successfully!",
         description: `${chain.name} has been added to your wallet.`,
+        variant: "success",
       })
     } catch (error: any) {
       if (error.message?.includes('User rejected')) {
