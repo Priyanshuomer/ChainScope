@@ -211,7 +211,8 @@ export const addNetworkToWallet = async (chainData: any) => {
 
     // Handle network already exists
     if (errorMessage.includes('already exist') || errorCode === -32603) {
-      throw new Error('This network is already in your wallet')
+      // throw new Error('This network is heyy already in your wallet')
+      return;
     }
 
     // Handle pending requests
