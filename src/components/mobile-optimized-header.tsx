@@ -12,7 +12,7 @@ import {
 import { Logo } from "./logo"
 import { WalletConnectButton } from "./wallet-connect-button"  // ✅ Import WalletConnectButton
 
-import ConnectWalletButton from "./connectWallet"
+import {ConnectWalletButton} from "./connectWallet"
 
 export const MobileOptimizedHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
