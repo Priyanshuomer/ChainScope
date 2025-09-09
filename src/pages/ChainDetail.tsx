@@ -347,9 +347,9 @@ const ChainDetail = () => {
     <div className="mb-6">
   <Card className="bg-gradient-card border-border/50">
     <CardContent className="p-4">
-      <span className="text-sm text-muted-foreground">RPC Performance</span>
-      <div className="mt-3 w-full h-6 bg-gray-200/50 backdrop-blur-md rounded-full overflow-hidden relative shadow-inner border border-gray-300">
-        <div
+      {/* <span className="text-sm text-muted-foreground">RPC Performance</span> */}
+      {/* <div className="mt-3 w-full h-6 bg-gray-200/50 backdrop-blur-md rounded-full overflow-hidden relative shadow-inner border border-gray-300"> */}
+        {/* <div
           className="h-full rounded-full transition-all duration-700 ease-in-out"
           style={{
             width: `${Math.min(calculateHealthScore() || 0, 100)}%`,
@@ -359,10 +359,10 @@ const ChainDetail = () => {
             boxShadow: '0 0 10px rgba(0,0,0,0.1), inset 0 1px 3px rgba(255,255,255,0.4)'
           }}
         />
-      </div>
-      <p className="text-sm font-medium mt-2 text-center text-muted-foreground">
+      </div> */}
+      {/* <p className="text-sm font-medium mt-2 text-center text-muted-foreground">
         {Math.min(calculateHealthScore() || 0, 100)} / 100
-      </p>
+      </p> */}
     </CardContent>
   </Card>
 </div>
