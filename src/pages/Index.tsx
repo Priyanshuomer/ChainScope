@@ -28,13 +28,24 @@ import {
   Star,
   Globe,
   BarChart3,
-  Mail
+  Mail,
+  Filter
 } from "lucide-react"
 import { analytics } from '@/lib/analytics'
 import { chainDataMerger } from '@/lib/chain-data-merger'
 
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+
+
+
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('')
+  const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [selectedFilters, setSelectedFilters] = useState<string[]>([])
   const [activeTab, setActiveTab] = useState('all')
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
@@ -309,47 +320,117 @@ const Index = () => {
                 </div>
               </div> */}
               
-              <div className="flex flex-col gap-3 sm:gap-4 w-full">
-      <NetworkFilters
-    selectedFilters={selectedFilters}
-    onFilterChange={handleFilterChange}
-  />
+{/* 🔹 Filters Button + View Toggle */}
+<div className="flex justify-center items-center gap-6 mb-6">
+<Button
+  onClick={() => setIsFilterOpen(true)}
+  className={`flex items-center gap-2 px-4 py-2 ${
+    selectedFilters.length > 0
+      ? "bg-primary text-black hover:bg-primary/90"
+      : "bg-muted text-foreground hover:bg-muted/70"
+  }`}
+>
+  <Filter className="w-4 h-4" />
+  Filters
+</Button>
 
-  <div className="flex justify-end">
-    <div className="flex items-center gap-2">
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant={viewMode === "grid" ? "default" : "outline"}
-            size="sm"
-            onClick={() => setViewMode("grid")}
-          >
-            <Grid3X3 className="w-4 h-4" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Grid view - cards layout</p>
-        </TooltipContent>
-      </Tooltip>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant={viewMode === "list" ? "default" : "outline"}
-            size="sm"
-            onClick={() => setViewMode("list")}
-          >
-            <List className="w-4 h-4" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>List view - compact layout</p>
-        </TooltipContent>
-      </Tooltip>
-    </div>
+
+  
+  <div className="flex items-center gap-2">
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant={viewMode === "grid" ? "default" : "outline"}
+          size="sm"
+          onClick={() => setViewMode("grid")}
+        >
+          <Grid3X3 className="w-4 h-4" />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Grid view - cards layout</p>
+      </TooltipContent>
+    </Tooltip>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant={viewMode === "list" ? "default" : "outline"}
+          size="sm"
+          onClick={() => setViewMode("list")}
+        >
+          <List className="w-4 h-4" />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>List view - compact layout</p>
+      </TooltipContent>
+    </Tooltip>
   </div>
 </div>
 
+{/* 🔹 Dialog for NetworkFilters */}
+<Dialog open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+  <DialogContent className="max-w-6xl w-full p-0 overflow-hidden rounded-2xl">
+    {/* Header */}
+    <div className="flex items-center justify-between px-6 py-4 border-b bg-muted/40">
+      <DialogHeader className="flex flex-row items-center space-x-3">
+        <div className="flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-5 h-5 text-primary"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-1 1h-1l-4 8v4h3a1 1 0 110 2H6a1 1 0 110-2h3v-4L5 7H4a1 1 0 01-1-1V4z" />
+          </svg>
+          <DialogTitle className="text-lg font-semibold text-foreground">
+            Filters
+          </DialogTitle>
+        </div>
+      </DialogHeader>
+      <button
+        onClick={() => setIsFilterOpen(false)}
+        className="rounded-md p-2 hover:bg-muted transition-colors"
+      >
+        ✕
+      </button>
+    </div>
 
+    {/* Body */}
+    <div className="p-6 bg-background max-h-[70vh] overflow-y-auto">
+      <NetworkFilters
+        selectedFilters={selectedFilters}
+        onFilterChange={handleFilterChange}
+      />
+    </div>
+
+    {/* Footer */}
+    <div className="flex justify-end gap-3 px-6 py-4 border-t bg-muted/40">
+      <Button
+        variant="outline"
+        onClick={() => {
+          handleFilterChange([]) // clear all filters
+          setIsFilterOpen(false)
+        }}
+      >
+        Clear All
+      </Button>
+    <Button
+  onClick={() => {
+    // close modal
+    setIsFilterOpen(false)
+    // scroll to top
+    window.scrollTo({ top: 1200, behavior: "smooth" })
+  }}
+  className="bg-primary text-black hover:bg-primary/90"
+>
+  Apply Filters
+</Button>
+
+    </div>
+  </DialogContent>
+</Dialog>
             </div>
           </div>
           
