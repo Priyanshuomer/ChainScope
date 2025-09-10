@@ -26,13 +26,16 @@ export const Logo: React.FC<LogoProps> = ({
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       {/* Logo Icon */}
-      <div className={`${sizeClasses[size]} bg-gradient-to-br from-primary via-primary/90 to-primary/70 rounded-xl flex items-center justify-center relative overflow-hidden`}>
+      <div
+        className={`${sizeClasses[size]} bg-gradient-to-br from-primary via-primary/90 to-primary/70 
+        flex items-center justify-center relative overflow-hidden rounded-none`} // changed
+      >
         {/* Network Grid Pattern */}
         <div className="absolute inset-0 opacity-20">
           <div className="w-full h-full bg-gradient-to-br from-white/10 to-transparent"></div>
         </div>
         
-        {/* Main Icon - Optimized Chain Link Logo */}
+        {/* Main Icon */}
         <div className="relative z-10">
           <svg 
             className={`${size === 'sm' ? 'w-3 h-3' : size === 'md' ? 'w-4 h-4' : 'w-5 h-5'} text-primary-foreground`}
@@ -43,17 +46,10 @@ export const Logo: React.FC<LogoProps> = ({
             fill="currentColor"
           >
             <title>ChainScope</title>
-            
-            {/* Enhanced Chain Link - Larger and more visible design */}
             <path d="M190 190A95 95 0 1 1 190 65L160 90A60 60 0 1 0 160 165z" strokeWidth="2" stroke="currentColor" fill="currentColor"/>
-            
-            {/* Enhanced Four-pointed Star - More prominent connectivity symbol */}
             <path d="M200 105q12 10 22 22-10 12-22 22-12-10-22-22 10-12 22-22z" fill="currentColor"/>
           </svg>
         </div>
-        
-        {/* Subtle gradient overlay */}
-        <div className="absolute top-0 right-0 w-2 h-2 bg-gradient-to-br from-white/20 to-transparent rounded-full"></div>
       </div>
 
       {/* Logo Text */}
@@ -81,7 +77,10 @@ export const LogoCompact: React.FC<LogoProps> = ({ size = 'md', className = '' }
 
   return (
     <div className={`flex items-center gap-1.5 ${className}`}>
-      <div className={`${sizeClasses[size]} bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center`}>
+      <div
+        className={`${sizeClasses[size]} bg-gradient-to-br from-primary to-primary/80 
+        flex items-center justify-center rounded-none`} // changed
+      >
         <svg 
           className={`${size === 'sm' ? 'w-2.5 h-2.5' : size === 'md' ? 'w-3 h-3' : 'w-4 h-4'} text-primary-foreground`}
           viewBox="0 0 256 256" 
@@ -89,7 +88,6 @@ export const LogoCompact: React.FC<LogoProps> = ({ size = 'md', className = '' }
           fill="currentColor"
           aria-hidden="true"
         >
-          {/* Enhanced Chain Link for compact version */}
           <path d="M190 190A95 95 0 1 1 190 65L160 90A60 60 0 1 0 160 165z" strokeWidth="3" stroke="currentColor"/>
           <path d="M200 105q12 10 22 22-10 12-22 22-12-10-22-22 10-12 22-22z"/>
         </svg>
@@ -99,4 +97,4 @@ export const LogoCompact: React.FC<LogoProps> = ({ size = 'md', className = '' }
       </span>
     </div>
   )
-} 
+}

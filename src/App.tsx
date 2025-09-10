@@ -11,6 +11,8 @@ import { ScrollToTop } from '@/components/scroll-to-top'
 import { analytics, performanceMonitor } from '@/lib/analytics'
 import { config } from '@/lib/wallet-config'
 
+import Analytics from "./pages/analytics"
+
 // Lazy load pages for better performance
 const Index = React.lazy(() => import('./pages/Index'))
 const ChainDetail = React.lazy(() => import('./pages/ChainDetail'))
@@ -92,6 +94,7 @@ function App() {
                   <Suspense fallback={<PageLoader />}>
                     <Routes>
                       <Route path="/" element={<Index />} />
+                       <Route path="/analytics" element={<Analytics />} />
                       
                       {/* Semantic URL Routes (Primary) */}
                       <Route path="/network/:slug" element={<ChainDetail />} />

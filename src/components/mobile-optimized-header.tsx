@@ -33,7 +33,7 @@ export const MobileOptimizedHeader = () => {
     },
     {
       name: 'Analytics',
-      href: '/#analytics',
+      href: '/analytics',
       icon: BarChart3,
       description: 'Network analytics and insights'
     }
