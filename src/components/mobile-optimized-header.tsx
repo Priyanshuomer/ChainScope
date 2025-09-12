@@ -30,13 +30,13 @@ export const MobileOptimizedHeader = () => {
       href: '/compare',
       icon: GitCompare,
       description: 'Compare networks side-by-side'
-    },
-    {
-      name: 'Analytics',
-      href: '/analytics',
-      icon: BarChart3,
-      description: 'Network analytics and insights'
     }
+    // {
+    //   name: 'Analytics',
+    //   href: '/analytics',
+    //   icon: BarChart3,
+    //   description: 'Network analytics and insights'
+    // }
   ]
 
   const isActive = (href: string) => {
@@ -77,7 +77,7 @@ export const MobileOptimizedHeader = () => {
                       to={item.href}
                       className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                         isActive(item.href)
-                          ? 'bg-primary text-primary-foreground'
+                          ? 'text-[hsl(142,84%,55%)]'         
                           : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                       }`}
                     >

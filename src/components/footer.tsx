@@ -55,8 +55,8 @@ export const Footer = () => {
     pages: [
       { name: 'Home', href: '/' },
       { name: 'Compare Networks', href: '/compare' },
-      { name: 'Network Details', href: '/chain/1' },
-      { name: 'Analytics', href: '/#analytics' }
+      // { name: 'Network Details', href: '/chain/1' },
+      // { name: 'Analytics', href: '/#analytics' }
     ],
     legal: [
       { name: 'Privacy Policy', href: '/privacy' },

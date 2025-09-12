@@ -12,56 +12,48 @@ export function ConnectWalletButton() {
     appKitModal.open({ view: 'Connect' }) // open Reown modal
   }
 
-  const handleCopy = () => {
-    if (!address) return
-    navigator.clipboard.writeText(address)
-    setCopied(true)
-    toast({
-      title: 'Address Copied',
-      description: `${address.slice(0, 6)}...${address.slice(-4)} copied to clipboard.`,
-    })
-    setTimeout(() => setCopied(false), 2000)
-  }
+  // Uncomment to enable copy functionality
+  // const handleCopy = () => {
+  //   if (!address) return
+  //   navigator.clipboard.writeText(address)
+  //   setCopied(true)
+  //   toast({
+  //     title: 'Address Copied',
+  //     description: `${address.slice(0, 6)}...${address.slice(-4)} copied to clipboard.`,
+  //   })
+  //   setTimeout(() => setCopied(false), 2000)
+  // }
 
-  const handleDisconnect = () => {
-    disconnect()
-    toast({
-      title: 'Disconnected',
-      description: 'Your wallet has been disconnected successfully.',
-      variant: 'destructive',
-    })
-  }
+  // Uncomment to enable disconnect functionality
+  // const handleDisconnect = () => {
+  //   disconnect()
+  //   toast({
+  //     title: 'Disconnected',
+  //     description: 'Your wallet has been disconnected successfully.',
+  //     variant: 'destructive',
+  //   })
+  // }
 
   if (isConnected && address) {
     return (
       <div className="flex items-center space-x-2">
         <button
-          onClick={handleCopy}
+          // onClick={handleCopy}
           className="
-            px-4 py-2 bg-green-600 text-white rounded-md shadow-md
-            hover:bg-green-700 transition
+            inline-flex items-center px-3 py-1.5
+            bg-primary
+            text-black font-semibold rounded-md shadow-md
+            transition-transform duration-200 ease-in-out
+            hover:scale-105 hover:shadow-lg
+            active:scale-95
             focus:outline-none focus:ring-2 focus:ring-green-400
           "
-          title="Copy wallet address"
+          title="Connected wallet"
         >
-          Connected: {address.slice(0, 6)}...{address.slice(-4)}
+          {address.slice(0, 6)}...{address.slice(-4)}
         </button>
-        <button
-          onClick={handleDisconnect}
-          className="
-            px-3 py-2 bg-red-600 text-white rounded-md shadow-md
-            hover:bg-red-700 transition
-            focus:outline-none focus:ring-2 focus:ring-red-400
-            flex items-center justify-center
-          "
-          title="Disconnect wallet"
-          aria-label="Disconnect wallet"
-        >
-          {/* Left arrow SVG */}
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
+        {/* Add a disconnect button if desired */}
+        {/* <button onClick={handleDisconnect} className="text-xs text-red-600 ml-2">Disconnect</button> */}
       </div>
     )
   }
@@ -70,9 +62,9 @@ export function ConnectWalletButton() {
     <button
       onClick={openModal}
       className="
-        inline-flex items-center px-5 py-2 
-        bg-gradient-to-r from-green-700 via-green-600 to-green-700 
-        text-white font-semibold rounded-md shadow-md 
+        inline-flex items-center px-3 py-1.5
+        bg-primary
+        text-black font-semibold rounded-md shadow-md
         transition-transform duration-200 ease-in-out
         hover:scale-105 hover:shadow-lg
         active:scale-95
@@ -80,17 +72,7 @@ export function ConnectWalletButton() {
       "
       title="Connect Wallet"
     >
-      {/* Wallet icon SVG */}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-5 w-5 mr-2"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={2}
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" />
-      </svg>
+      {/* Wallet icon SVG (optional) */}
       Connect Wallet
     </button>
   )

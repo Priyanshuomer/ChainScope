@@ -18,13 +18,15 @@ import {
   Activity,
   Globe,
   Zap,
-  ArrowRight
+  ArrowRight,
+  Wallet
 } from "lucide-react"
 import { Link } from 'react-router-dom'
 import { MergedChainData } from '@/types/chain'
 import { getSemanticUrl } from '@/lib/url-mapping'
 import { useToast } from '@/hooks/use-toast'
 import { addNetworkToWallet } from '@/lib/wallet-config'
+import {ChainIcon} from './ChainIcon';
 
 interface EnhancedChainCardProps {
   chain: MergedChainData
@@ -141,6 +143,26 @@ const calculateHealthScore = () => {
   const [isAddingToWallet, setIsAddingToWallet] = useState(false)
   // console.log("health   : ",healthScore);
 
+const getChainIconUrl = (chain) => {
+  if (!chain) return null;
+
+  // Direct URLs first
+  if (chain.icon?.startsWith("http")) return chain.icon;
+  if (chain.logo?.startsWith("http")) return chain.logo;
+  if (chain.explorers?.[0]?.icon?.startsWith("http")) return chain.explorers[0].icon;
+
+  // Ethereum-lists slug → official location
+  if (chain.icon) {
+    // Try .svg first
+    return `https://raw.githubusercontent.com/ethereum-lists/chains/master/_data/icons/${chain.icon}/logo.svg`;
+  }
+
+  return null;
+};
+
+
+
+
   if (viewMode === 'list') {
     return (
       <Card className={`bg-gradient-card border-border/50 hover:border-border transition-all duration-300 hover:shadow-lg ${className}`}>
@@ -148,13 +170,9 @@ const calculateHealthScore = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               {/* Chain Icon */}
-              <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center">
-                {chain.icon ? (
-                  <img src={chain.icon} alt={chain.name} className="w-8 h-8 rounded" />
-                ) : (
-                  <Globe className="w-6 h-6 text-primary" />
-                )}
-              </div>
+             <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center">
+  <ChainIcon chain={chain} size={32} />
+</div>
 
               {/* Chain Info */}
               <div className="flex-1 min-w-0">
@@ -222,12 +240,8 @@ const calculateHealthScore = () => {
           <div className="flex items-center space-x-3">
             {/* Chain Icon */}
             <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center">
-              {chain.icon ? (
-                <img src={chain.icon} alt={chain.name} className="w-8 h-8 rounded" />
-              ) : (
-                <Globe className="w-6 h-6 text-primary" />
-              )}
-            </div>
+  <ChainIcon chain={chain} size={32} />
+</div>
 
             {/* Chain Info */}
             <div className="flex-1 min-w-0">
@@ -286,104 +300,99 @@ const calculateHealthScore = () => {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center space-x-2">
-          <Button className="flex-1" asChild>
-            <Link to={getSemanticUrl(chain.chainId)}>
-              View Details
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              {/* <Button
-                variant="outline"
-                size="sm"
-                onClick={() => copyToClipboard(chain.chainId.toString(), 'Chain ID')}
-              >
-                <Copy className="w-4 h-4" />
-              </Button> */}
 
-             <Button className="flex-1" onClick={async () => {
-              try {
-                setIsAddingToWallet(true)
-                await addNetworkToWallet(chain)
+<div className="flex items-center space-x-2">
+  <Button className="flex-1" asChild>
+    <Link to={getSemanticUrl(chain.chainId)}>
+      View Details
+      <ArrowRight className="w-4 h-4 ml-2" />
+    </Link>
+  </Button>
 
-                toast({
-                  title: "Network Added Successfully!",
-                  description: `${chain.name} has been added to your wallet with the best available RPC endpoints.`,
-                  variant: "success",
-                })
-              } catch (error: any) {
-                if (error.code === 4001 || error.message?.includes("User rejected")) {
-                  toast({
-                    title: "Request Cancelled",
-                    description: "You declined to add the network to your wallet.",
-                    variant: "destructive",
-                  })
-                } else if (
-                  error.code === -32602 ||
-                  error.message?.includes("Invalid network parameters")
-                ) {
-                  toast({
-                    title: "Invalid Network Configuration",
-                    description:
-                      "The network configuration is invalid. Please try again or add manually.",
-                    variant: "destructive",
-                  })
-                } else if (
-                  error.code === -32000 ||
-                  error.message?.includes("already exists") ||
-                  error.message?.includes("already added")
-                ) {
-                  toast({
-                    title: "Network Added",
-                    description: `${chain.name} is already added in your wallet.`,
-                    variant: "success",
-                  })
-                } else if (error.message?.includes("No official or reliable RPC endpoints")) {
-                  toast({
-                    title: "No Official RPC Endpoints",
-                    description:
-                      "For security reasons, we only add networks with verified RPC endpoints to wallets. Please add this network manually using official RPC URLs.",
-                    variant: "destructive",
-                  })
-                } else if (error.message?.includes("No Ethereum wallet detected")) {
-                  toast({
-                    title: "Wallet Not Detected",
-                    description: "Please install and enable MetaMask or another Web3 wallet.",
-                    variant: "destructive",
-                  })
-                } else if (!error.message) {
-                  toast({
-                    title: "Unable to Add Network",
-                    description: "Please ensure your wallet is unlocked and try again.",
-                    variant: "destructive",
-                  })
-                } else {
-                  toast({
-                    title: "Failed to Add Network",
-                    description:
-                      error.message ||
-                      "Please try again or add the network manually from the details below.",
-                    variant: "destructive",
-                  })
-                }
-              } finally {
-                setIsAddingToWallet(false)
-              }
-            }}>
-              Add Network
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button
+        variant="ghost"       // minimal, no background theme
+        size="icon"           // makes it a square, only icon size
+        onClick={async () => {
+          try {
+            setIsAddingToWallet(true)
+            await addNetworkToWallet(chain)
 
+            toast({
+              title: "Network Added Successfully!",
+              description: `${chain.name} has been added to your wallet with the best available RPC endpoints.`,
+              variant: "success",
+            })
+          } catch (error: any) {
+            if (error.code === 4001 || error.message?.includes("User rejected")) {
+              toast({
+                title: "Request Cancelled",
+                description: "You declined to add the network to your wallet.",
+                variant: "destructive",
+              })
+            } else if (
+              error.code === -32602 ||
+              error.message?.includes("Invalid network parameters")
+            ) {
+              toast({
+                title: "Invalid Network Configuration",
+                description:
+                  "The network configuration is invalid. Please try again or add manually.",
+                variant: "destructive",
+              })
+            } else if (
+              error.code === -32000 ||
+              error.message?.includes("already exists") ||
+              error.message?.includes("already added")
+            ) {
+              toast({
+                title: "Network Added",
+                description: `${chain.name} is already added in your wallet.`,
+                variant: "success",
+              })
+            } else if (error.message?.includes("No official or reliable RPC endpoints")) {
+              toast({
+                title: "No Official RPC Endpoints",
+                description:
+                  "For security reasons, we only add networks with verified RPC endpoints to wallets. Please add this network manually using official RPC URLs.",
+                variant: "destructive",
+              })
+            } else if (error.message?.includes("No Ethereum wallet detected")) {
+              toast({
+                title: "Wallet Not Detected",
+                description: "Please install and enable MetaMask or another Web3 wallet.",
+                variant: "destructive",
+              })
+            } else if (!error.message) {
+              toast({
+                title: "Unable to Add Network",
+                description: "Please ensure your wallet is unlocked and try again.",
+                variant: "destructive",
+              })
+            } else {
+              toast({
+                title: "Failed to Add Network",
+                description:
+                  error.message ||
+                  "Please try again or add the network manually from the details below.",
+                variant: "destructive",
+              })
+            }
+          } finally {
+            setIsAddingToWallet(false)
+          }
+        }}
+      >
+        <Wallet className="w-5 h-5" />
+      </Button>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>Add Network to Wallet</p>
+    </TooltipContent>
+  </Tooltip>
+</div>
 
-
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Add Network to Wallet</p>
-            </TooltipContent>
-          </Tooltip>
-        </div>
       </CardContent>
     </Card>
   )

@@ -33,6 +33,9 @@ import {
 } from "lucide-react"
 import { analytics } from '@/lib/analytics'
 import { chainDataMerger } from '@/lib/chain-data-merger'
+import Analytics from './analytics'
+
+import { FiltersDropdown } from "../components/FiltersDropdown"
 
 import {
   Dialog,
@@ -260,12 +263,22 @@ const Index = () => {
 
         </div>
       </section>
+      
+     <div className="mb-0 sm:mb-1">
+  <Analytics />
+</div>
+
+  
+   
+
+
+
 
       {/* Networks Section */}
-      <section id="networks-section" className="py-12 sm:py-16 lg:py-20">
+      <section id="networks-section" className="py-12 mt-0 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Search Section */}
-          <div className="mb-8 sm:mb-12">
+          <div className="mb-1 sm:mb-12">
             <div className="text-center mb-6 sm:mb-8">
               <h2 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">Find Your Perfect Blockchain Network</h2>
               <p className="text-sm sm:text-base text-muted-foreground px-4 sm:px-0">
@@ -321,21 +334,14 @@ const Index = () => {
               </div> */}
               
 {/* 🔹 Filters Button + View Toggle */}
-<div className="flex justify-center items-center gap-6 mb-6">
-<Button
-  onClick={() => setIsFilterOpen(true)}
-  className={`flex items-center gap-2 px-4 py-2 ${
-    selectedFilters.length > 0
-      ? "bg-primary text-black hover:bg-primary/90"
-      : "bg-muted text-foreground hover:bg-muted/70"
-  }`}
->
-  <Filter className="w-4 h-4" />
-  Filters
-</Button>
+<div className="flex justify-center items-center gap-6 mb-6 w-full">
+  {/* 🔹 Filters dropdown */}
+  <FiltersDropdown
+    selectedFilters={selectedFilters}
+    onFilterChange={setSelectedFilters}
+  />
 
-
-  
+  {/* 🔹 Grid/List toggle */}
   <div className="flex items-center gap-2">
     <Tooltip>
       <TooltipTrigger asChild>
@@ -367,6 +373,9 @@ const Index = () => {
     </Tooltip>
   </div>
 </div>
+
+
+
 
 {/* 🔹 Dialog for NetworkFilters */}
 <Dialog open={isFilterOpen} onOpenChange={setIsFilterOpen}>
