@@ -16,6 +16,10 @@ export const config = createConfig({
   connectors: [injected()],
 })
 
+
+
+
+
 // 4. Enhanced utility function to add network to wallet
 export const addNetworkToWallet = async (chainData: any) => {
   // Check if we're in a browser environment

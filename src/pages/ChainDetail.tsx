@@ -37,7 +37,7 @@ import { FaucetSection } from "@/components/faucet-section"
 import { analytics } from "@/lib/analytics"
 import { MergedChainData } from "@/types/chain"
 import { getWalletRpcEndpoints, getBestRpcEndpoint } from '@/lib/rpc-selector'
-import { addNetworkToWallet } from '@/lib/wallet-config'
+import { addNetworkToWallet } from '../appkit-config'
 
 const ChainDetail = () => {
   const { chainId, slug } = useParams<{ chainId?: string; slug?: string }>()

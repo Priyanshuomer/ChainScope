@@ -7,29 +7,34 @@ interface ChainIconProps {
   size?: number;
 }
 
+
 export const ChainIcon: React.FC<ChainIconProps> = ({ chain, size = 32 }) => {
-  const [imgSrc, setImgSrc] = useState<string | null>(null);
+return <Globe className="text-primary" style={{ width: size, height: size }} />
+}
 
-  useEffect(() => {
-    if (!chain || !chain.icon) {
-      setImgSrc(null);
-      return;
-    }
+// export const ChainIcon: React.FC<ChainIconProps> = ({ chain, size = 32 }) => {
+//   const [imgSrc, setImgSrc] = useState<string | null>(null);
 
-    // Use the RAW GitHub URL for SVGs
-    const url = `https://raw.githubusercontent.com/web3sdks/chain-icons/main/svg/${chain.icon.toLowerCase()}.svg`;
-    setImgSrc(url);
-  }, [chain]);
+//   useEffect(() => {
+//     if (!chain || !chain.icon) {
+//       setImgSrc(null);
+//       return;
+//     }
 
-  return imgSrc ? (
-    <img
-      src={imgSrc}
-      alt={chain.name}
-      className="rounded object-contain"
-      style={{ width: size, height: size }}
-      onError={() => setImgSrc(null)} // fallback to Globe
-    />
-  ) : (
-    <Globe className="text-primary" style={{ width: size, height: size }} />
-  );
-};
+//     // Use the RAW GitHub URL for SVGs
+//     const url = `https://raw.githubusercontent.com/web3sdks/chain-icons/main/svg/${chain.icon.toLowerCase()}.svg`;
+//     setImgSrc(url);
+//   }, [chain]);
+
+//   return imgSrc ? (
+//     <img
+//       src={imgSrc}
+//       alt={chain.name}
+//       className="rounded object-contain"
+//       style={{ width: size, height: size }}
+//       onError={() => setImgSrc(null)} // fallback to Globe
+//     />
+//   ) : (
+    
+//   );
+// };

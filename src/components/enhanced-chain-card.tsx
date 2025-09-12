@@ -25,7 +25,7 @@ import { Link } from 'react-router-dom'
 import { MergedChainData } from '@/types/chain'
 import { getSemanticUrl } from '@/lib/url-mapping'
 import { useToast } from '@/hooks/use-toast'
-import { addNetworkToWallet } from '@/lib/wallet-config'
+import { addNetworkToWallet } from '../appkit-config'
 import {ChainIcon} from './ChainIcon';
 
 interface EnhancedChainCardProps {
@@ -311,81 +311,92 @@ const getChainIconUrl = (chain) => {
 
   <Tooltip>
     <TooltipTrigger asChild>
-      <Button
-        variant="ghost"       // minimal, no background theme
-        size="icon"           // makes it a square, only icon size
-        onClick={async () => {
-          try {
-            setIsAddingToWallet(true)
-            await addNetworkToWallet(chain)
+     <Button
+  variant="ghost"
+  size="icon"
+  onClick={async () => {
+    try {
+      setIsAddingToWallet(true)
+      await addNetworkToWallet(chain)
 
-            toast({
-              title: "Network Added Successfully!",
-              description: `${chain.name} has been added to your wallet with the best available RPC endpoints.`,
-              variant: "success",
-            })
-          } catch (error: any) {
-            if (error.code === 4001 || error.message?.includes("User rejected")) {
-              toast({
-                title: "Request Cancelled",
-                description: "You declined to add the network to your wallet.",
-                variant: "destructive",
-              })
-            } else if (
-              error.code === -32602 ||
-              error.message?.includes("Invalid network parameters")
-            ) {
-              toast({
-                title: "Invalid Network Configuration",
-                description:
-                  "The network configuration is invalid. Please try again or add manually.",
-                variant: "destructive",
-              })
-            } else if (
-              error.code === -32000 ||
-              error.message?.includes("already exists") ||
-              error.message?.includes("already added")
-            ) {
-              toast({
-                title: "Network Added",
-                description: `${chain.name} is already added in your wallet.`,
-                variant: "success",
-              })
-            } else if (error.message?.includes("No official or reliable RPC endpoints")) {
-              toast({
-                title: "No Official RPC Endpoints",
-                description:
-                  "For security reasons, we only add networks with verified RPC endpoints to wallets. Please add this network manually using official RPC URLs.",
-                variant: "destructive",
-              })
-            } else if (error.message?.includes("No Ethereum wallet detected")) {
-              toast({
-                title: "Wallet Not Detected",
-                description: "Please install and enable MetaMask or another Web3 wallet.",
-                variant: "destructive",
-              })
-            } else if (!error.message) {
-              toast({
-                title: "Unable to Add Network",
-                description: "Please ensure your wallet is unlocked and try again.",
-                variant: "destructive",
-              })
-            } else {
-              toast({
-                title: "Failed to Add Network",
-                description:
-                  error.message ||
-                  "Please try again or add the network manually from the details below.",
-                variant: "destructive",
-              })
-            }
-          } finally {
-            setIsAddingToWallet(false)
-          }
-        }}
-      >
-        <Wallet className="w-5 h-5" />
-      </Button>
+      toast({
+        title: "Network Added Successfully!",
+        description: `${chain.name} has been added to your wallet with the best available RPC endpoints.`,
+        variant: "success",
+      })
+    } catch (error: any) {
+      if (error.code === 4001 || error.message?.includes("User rejected")) {
+        toast({
+          title: "Request Cancelled",
+          description: "You declined to add the network to your wallet.",
+          variant: "destructive",
+        })
+      } else if (
+        error.code === -32602 ||
+        error.message?.includes("Invalid network parameters")
+      ) {
+        toast({
+          title: "Invalid Network Configuration",
+          description:
+            "The network configuration is invalid. Please try again or add manually.",
+          variant: "destructive",
+        })
+      } else if (
+        error.code === -32000 ||
+        error.message?.includes("already exists") ||
+        error.message?.includes("already added")
+      ) {
+        toast({
+          title: "Network Added",
+          description: `${chain.name} is already added in your wallet.`,
+          variant: "success",
+        })
+      } else if (error.message?.includes("No official or reliable RPC endpoints")) {
+        toast({
+          title: "No Official RPC Endpoints",
+          description:
+            "For security reasons, we only add networks with verified RPC endpoints to wallets. Please add this network manually using official RPC URLs.",
+          variant: "destructive",
+        })
+      } 
+      // ✅ NEW CASE — no healthy RPCs online
+      else if (error.message?.includes("No healthy RPC endpoints responded")) {
+        toast({
+          title: "No Healthy RPCs Available",
+          description:
+            "None of the RPC endpoints for this network are currently healthy. Please try again later.",
+          variant: "destructive",
+        })
+      } 
+      else if (error.message?.includes("No Ethereum wallet detected")) {
+        toast({
+          title: "Wallet Not Detected",
+          description: "Please install and enable MetaMask or another Web3 wallet.",
+          variant: "destructive",
+        })
+      } else if (!error.message) {
+        toast({
+          title: "Unable to Add Network",
+          description: "Please ensure your wallet is unlocked and try again.",
+          variant: "destructive",
+        })
+      } else {
+        toast({
+          title: "Failed to Add Network",
+          description:
+            error.message ||
+            "Please try again or add the network manually from the details below.",
+          variant: "destructive",
+        })
+      }
+    } finally {
+      setIsAddingToWallet(false)
+    }
+  }}
+>
+  <Wallet className="w-5 h-5" />
+</Button>
+
     </TooltipTrigger>
     <TooltipContent>
       <p>Add Network to Wallet</p>

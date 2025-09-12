@@ -29,12 +29,9 @@ export const Logo: React.FC<LogoProps> = ({
       <div
         className={`${sizeClasses[size]} 
           bg-gradient-to-br from-primary via-primary/90 to-primary/70 
-          shadow-lg shadow-primary/30 flex items-center justify-center 
+          flex items-center justify-center 
           relative overflow-hidden rounded-[30%]`}
       >
-        {/* Inner subtle gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-20 rounded-[30%]" />
-
         {/* Main Icon */}
         <div className="relative z-10">
           <svg
@@ -62,9 +59,6 @@ export const Logo: React.FC<LogoProps> = ({
             />
           </svg>
         </div>
-
-        {/* Subtle glow at the corner */}
-        <div className="absolute top-0 right-0 w-3 h-3 bg-gradient-to-br from-white/40 to-transparent rounded-full" />
       </div>
 
       {/* Logo Text */}
@@ -99,7 +93,7 @@ export const LogoCompact: React.FC<LogoProps> = ({ size = 'md', className = '' }
       <div
         className={`${sizeClasses[size]} 
           bg-gradient-to-br from-primary to-primary/80 
-          shadow-md shadow-primary/30 flex items-center justify-center rounded-[30%]`}
+          flex items-center justify-center rounded-[30%]`}
       >
         <svg
           className={`${

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom"
 import { getSemanticUrl } from "@/lib/url-mapping"
 import { useFavorites } from "@/hooks/useLocalStorage"
 import { useAccount, useConnect } from 'wagmi'
-import { addNetworkToWallet } from '@/lib/wallet-config'
+import { addNetworkToWallet } from '../appkit-config'
 import { getWalletRpcEndpoints } from '@/lib/rpc-selector'
 import { useToast } from '@/hooks/use-toast'
 

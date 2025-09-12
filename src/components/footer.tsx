@@ -72,7 +72,7 @@ export const Footer = () => {
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12">
           {/* Brand & Description */}
-                      <div className="sm:col-span-2 lg:col-span-1">
+                  <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
               <Logo size="lg" />
             </div>

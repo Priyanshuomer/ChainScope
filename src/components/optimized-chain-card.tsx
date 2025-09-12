@@ -10,7 +10,7 @@ import { useFavorites } from "@/hooks/useLocalStorage"
 import { useNavigate } from "react-router-dom"
 import { useAccount } from 'wagmi'
 import { useConnect } from 'wagmi'
-import { addNetworkToWallet } from '@/lib/wallet-config'
+import { addNetworkToWallet } from '../appkit-config'
 import { getWalletRpcEndpoints } from '@/lib/rpc-selector'
 import { toast } from "@/hooks/use-toast"
 

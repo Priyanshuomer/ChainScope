@@ -106,6 +106,7 @@ const Index = () => {
 
   // Background RPC health updates after initial load
   useEffect(() => {
+    //  window.scrollTo(0, 0);
     if (infiniteData?.allChains && infiniteData.allChains.length > 0 && !isLoading) {
       // Trigger background RPC health updates for popular chains
       const updateRpcHealth = async () => {
@@ -249,22 +250,22 @@ const Index = () => {
       </section>
 
       {/* Analytics Dashboard */}
-      <section id="analytics-section" className="py-12 sm:py-16 lg:py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
-              Real-Time Blockchain Network Analytics
-            </h2>
-            <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto px-4 sm:px-0">
-              Comprehensive insights into blockchain network performance, RPC endpoint health, and ecosystem trends. 
-              <span className="hidden sm:inline"> Monitor network uptime, latency, and reliability across the entire blockchain landscape.</span>
-            </p>
-          </div>
+      <section id="analytics-section" className="pt-12 sm:pt-16 lg:pt-20">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-8 sm:mb-12">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">
+        Real-Time Blockchain Network Analytics
+      </h2>
+      <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto px-4 sm:px-0">
+        Comprehensive insights into blockchain network performance, RPC endpoint health, and ecosystem trends. 
+        <span className="hidden sm:inline"> Monitor network uptime, latency, and reliability across the entire blockchain landscape.</span>
+      </p>
+    </div>
+  </div>
+</section>
 
-        </div>
-      </section>
       
-     <div className="mb-0 sm:mb-1">
+     <div className="mb-5 pb-5 sm:mb-1">
   <Analytics />
 </div>
 
