@@ -88,6 +88,7 @@
     "wagmi": "^2.16.9"
   },
   "devDependencies": {
+    "@metamask/providers": "^22.1.1",
     "@types/bun": "^1.2.20",
     "@types/node": "^22.10.2",
     "@types/qrcode.react": "^3.0.0",

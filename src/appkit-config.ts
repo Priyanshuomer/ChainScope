@@ -11,7 +11,15 @@ import {
 import { getWalletRpcEndpoints } from "./lib/rpc-selector";
 
 import * as chains from "viem/chains";
-export const networks = Object.values(chains) as any; // all viem chains
+
+// Only pick chain objects
+const viemChains = Object.values(chains).filter(
+  (c: any) => c && typeof c === "object" && "id" in c
+);
+
+export const networks = viemChains as any;
+
+
 
 
 
@@ -26,8 +34,8 @@ export const projectId =
 export const metadata = {
   name: "AppKit",
   description: "AppKit Example",
-  // url: "https://chainscope.app",
-  url : "http:localhost:8080",
+  url: "https://chainscope.app",
+  // url : "http:localhost:8080",
   icons: ["https://avatars.githubusercontent.com/u/179229932"],
 };
 
@@ -98,6 +106,8 @@ export const appKitModal = createAppKit({
 // ---- Replace your whole addNetworkToWallet with this ----
 
 import { getSortedRpcEndpoints } from "@/lib/sorted-rpc";
+const ethereum = window.ethereum as any;
+
 import { checkRpcHealth } from "@/lib/check-rpc-health"; // make sure you have this util
 
 export const addNetworkToWallet = async (chainData: any) => {
@@ -106,7 +116,7 @@ export const addNetworkToWallet = async (chainData: any) => {
     throw new Error("This function can only be called in a browser environment");
   }
 
-  if (!window.ethereum) {
+  if (!ethereum) {
     throw new Error("No Ethereum wallet detected. Please install MetaMask or another Web3 wallet.");
   }
 
@@ -251,26 +261,26 @@ export const addNetworkToWallet = async (chainData: any) => {
   }
 
   try {
-    const accounts = await window.ethereum.request({ method: "eth_accounts" });
+    const accounts = await ethereum.request({ method: "eth_accounts" });
     if (!accounts || accounts.length === 0) {
       throw new Error("WALLET_NOT_CONNECTED");
     }
 
     try {
-      await window.ethereum.request({
+      await ethereum.request({
         method: "wallet_switchEthereumChain",
         params: [{ chainId: chainIdHex }],
       });
       return true;
     } catch (switchError: any) {
       if (switchError.code === 4902 || switchError.code === -32603) {
-        await window.ethereum.request({
+        await ethereum.request({
           method: "wallet_addEthereumChain",
           params: [networkConfig],
         });
 
         try {
-          await window.ethereum.request({
+          await ethereum.request({
             method: "wallet_switchEthereumChain",
             params: [{ chainId: chainIdHex }],
           });
@@ -309,5 +319,4 @@ export const addNetworkToWallet = async (chainData: any) => {
     throw new Error(`Failed to add network: ${error.message}. Please try again or report this issue.`);
   }
 };
-
 
