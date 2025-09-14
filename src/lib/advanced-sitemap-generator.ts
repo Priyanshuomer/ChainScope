@@ -240,12 +240,12 @@ class AdvancedSitemapGenerator {
   /**
    * Generate RSS feed for recent updates
    */
-  public generateRSSFeed(chains: MergedChainData[]): string {
-    const recentChains = chains
-      .sort((a, b) => (b.lastUpdated || 0) - (a.lastUpdated || 0))
-      .slice(0, 50)
+public generateRSSFeed(chains: MergedChainData[]): string {
+  const recentChains = chains
+    .sort((a, b) => ((b.lastUpdated?.getTime() ?? 0) - (a.lastUpdated?.getTime() ?? 0)))
+    .slice(0, 50);
 
-    const items = recentChains.map(chain => `
+  const items = recentChains.map(chain => `
     <item>
       <title>${this.escapeXml(chain.name)} (Chain ID: ${chain.chainId})</title>
       <link>${this.baseUrl}/chain/${chain.chainId}</link>
@@ -258,9 +258,9 @@ class AdvancedSitemapGenerator {
       ]]></description>
       <category>Blockchain</category>
       ${chain.parent ? `<category>Layer 2</category>` : '<category>Layer 1</category>'}
-    </item>`).join('')
+    </item>`).join('');
 
-    return `<?xml version="1.0" encoding="UTF-8"?>
+  return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>ChainScope - Latest Blockchain Networks</title>
@@ -277,18 +277,19 @@ class AdvancedSitemapGenerator {
     </image>
     ${items}
   </channel>
-</rss>`
-  }
+</rss>`;
+}
+
 
   /**
    * Generate News XML sitemap for recent updates (Google News)
    */
-  public generateNewsSitemap(chains: MergedChainData[]): string {
-    const recentChains = chains
-      .filter(chain => chain.lastUpdated && chain.lastUpdated > Date.now() - (48 * 60 * 60 * 1000)) // Last 48 hours
-      .slice(0, 1000) // Google News limit
+public generateNewsSitemap(chains: MergedChainData[]): string {
+  const recentChains = chains
+    .filter(chain => chain.lastUpdated && chain.lastUpdated.getTime() > Date.now() - (48 * 60 * 60 * 1000)) // Last 48 hours
+    .slice(0, 1000); // Google News limit
 
-    const entries = recentChains.map(chain => `
+  const entries = recentChains.map(chain => `
   <url>
     <loc>${this.baseUrl}/chain/${chain.chainId}</loc>
     <news:news>
@@ -300,14 +301,15 @@ class AdvancedSitemapGenerator {
       <news:title>${this.escapeXml(chain.name)} Network Update</news:title>
       <news:keywords>blockchain, ${chain.name.toLowerCase()}, cryptocurrency, web3</news:keywords>
     </news:news>
-  </url>`).join('')
+  </url>`).join('');
 
-    return `<?xml version="1.0" encoding="UTF-8"?>
+  return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   ${entries}
-</urlset>`
-  }
+</urlset>`;
+}
+
 
   private getChainPriority(chain: MergedChainData): number {
     // High priority chains

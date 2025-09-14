@@ -47,3 +47,4 @@ out/
 # Analytics and monitoring
 *.analytics
 *.metrics
+.vercel

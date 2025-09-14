@@ -4,7 +4,7 @@ import { mainnet, sepolia } from 'wagmi/chains'
 import { getWalletRpcEndpoints } from './rpc-selector'
 
 // 1. Get projectId from environment variables
-const projectId = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || import.meta.env.VITE_REOWN_PROJECT_ID || 'demo-project-id'
+const projectId = import.meta.env.VITE_REOWN_PROJECT_ID || 'demo-project-id'
 
 // 2. Create wagmi config
 export const config = createConfig({
@@ -18,7 +18,7 @@ export const config = createConfig({
 
 
 
-
+const ethereum = window.ethereum as any;
 
 // 4. Enhanced utility function to add network to wallet
 export const addNetworkToWallet = async (chainData: any) => {
@@ -166,14 +166,14 @@ export const addNetworkToWallet = async (chainData: any) => {
 
   try {
     // Check if wallet is connected
-    const accounts = await window.ethereum.request({ method: 'eth_accounts' })
+    const accounts = await ethereum.request({ method: 'eth_accounts' })
     if (!accounts || accounts.length === 0) {
       throw new Error('WALLET_NOT_CONNECTED')
     }
 
     // First, check if the network already exists by trying to switch to it
     try {
-      await window.ethereum.request({
+      await ethereum.request({
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: chainIdHex }]
       })
@@ -181,14 +181,14 @@ export const addNetworkToWallet = async (chainData: any) => {
     } catch (switchError: any) {
       // If error code is 4902, network doesn't exist - try to add it
       if (switchError.code === 4902 || switchError.code === -32603) {
-        await window.ethereum.request({
+        await ethereum.request({
           method: 'wallet_addEthereumChain',
           params: [networkConfig]
         })
         
         // Verify the network was added by trying to switch to it
         try {
-          await window.ethereum.request({
+          await ethereum.request({
             method: 'wallet_switchEthereumChain',
             params: [{ chainId: chainIdHex }]
           })
