@@ -89,7 +89,7 @@ export const Footer = () => {
                  Reach our global community of Web3 developers, blockchain enthusiasts, and crypto users. 
                </p>
                <Button size="sm" variant="outline" asChild className="w-full">
-                 <a href="mailto:hello@chainscope.app?subject=ChainScope Advertising Inquiry&body=Hello ChainScope Team,%0D%0A%0D%0AI'm interested in advertising on your platform.%0D%0A%0D%0APlease provide information about:%0D%0A- Available advertising options%0D%0A- Pricing details%0D%0A- Promotion opportunities%0D%0A- Target audience demographics%0D%0A%0D%0AThank you!">
+                 <a href="mailto:hello@chainscope.app">
                    <Mail className="w-4 h-4 mr-2" />
                    Advertise With Us
                  </a>

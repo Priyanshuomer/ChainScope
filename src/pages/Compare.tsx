@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
+//  import { ClipboardDocumentIcon } from '@heroicons/react/24/outline'; // or solid if you like
 import { 
   ArrowLeft, 
   Search, 
@@ -14,6 +15,7 @@ import {
   Globe, 
   Shield, 
   Zap, 
+  Copy,
   Coins, 
   Settings,
   CheckCircle,
@@ -188,6 +190,9 @@ const Compare = () => {
     return <Badge variant="destructive">Poor</Badge>
   }
 
+
+  // text-muted-foreground
+
   const renderComparisonTable = () => (
     <div className="overflow-x-auto -mx-4 sm:mx-0">
       <div className="min-w-full inline-block align-middle">
@@ -195,7 +200,7 @@ const Compare = () => {
           <table className="min-w-full divide-y divide-border">
             <thead className="bg-muted/50">
               <tr>
-                <th className="px-3 sm:px-4 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wider min-w-[150px] sm:min-w-[200px]">
+                <th className="px-3 sm:px-4 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold uppercase tracking-wider min-w-[150px] sm:min-w-[200px]">
                   Metric
                 </th>
                 {selectedChains.map(chain => (
@@ -221,13 +226,13 @@ const Compare = () => {
         <tbody className="bg-background divide-y divide-border">
           {/* Basic Information */}
           <tr className="hover:bg-muted/30 transition-colors">
-            <td className="px-3 sm:px-4 py-3 sm:py-4 text-sm font-medium bg-muted/30 text-muted-foreground">Chain ID</td>
+            <td className="px-3 sm:px-4 py-3 sm:py-4 text-sm font-medium bg-muted/30 ">Chain ID</td>
             {selectedChains.map(chain => (
               <td key={chain.chainId} className="px-3 sm:px-4 py-3 sm:py-4 text-sm">{chain.chainId}</td>
             ))}
           </tr>
           <tr className="hover:bg-muted/30 transition-colors">
-            <td className="px-3 sm:px-4 py-3 sm:py-4 text-sm font-medium bg-muted/30 text-muted-foreground">Network Type</td>
+            <td className="px-3 sm:px-4 py-3 sm:py-4 text-sm font-medium bg-muted/30 ">Network Type</td>
             {selectedChains.map(chain => (
               <td key={chain.chainId} className="px-3 sm:px-4 py-3 sm:py-4 text-sm">
                 <Badge variant={chain.isTestnet ? "secondary" : "default"} className="text-xs">
@@ -237,7 +242,7 @@ const Compare = () => {
             ))}
           </tr>
           <tr className="hover:bg-muted/30 transition-colors">
-            <td className="px-3 sm:px-4 py-3 sm:py-4 text-sm font-medium bg-muted/30 text-muted-foreground">Status</td>
+            <td className="px-3 sm:px-4 py-3 sm:py-4 text-sm font-medium bg-muted/30 ">Status</td>
             {selectedChains.map(chain => (
               <td key={chain.chainId} className="px-3 sm:px-4 py-3 sm:py-4 text-sm">
                 <div className="flex items-center gap-2">
@@ -248,7 +253,7 @@ const Compare = () => {
             ))}
           </tr>
           <tr className="hover:bg-muted/30 transition-colors">
-            <td className="px-3 sm:px-4 py-3 sm:py-4 text-sm font-medium bg-muted/30 text-muted-foreground">Native Currency</td>
+            <td className="px-3 sm:px-4 py-3 sm:py-4 text-sm font-medium bg-muted/30 ">Native Currency</td>
             {selectedChains.map(chain => (
               <td key={chain.chainId} className="px-3 sm:px-4 py-3 sm:py-4 text-sm">
                 <div className="flex items-center gap-2">
@@ -259,8 +264,9 @@ const Compare = () => {
               </td>
             ))}
           </tr>
+        
           <tr className="hover:bg-muted/30 transition-colors">
-            <td className="px-3 sm:px-4 py-3 sm:py-4 text-sm font-medium bg-muted/30 text-muted-foreground">Verification</td>
+            <td className="px-3 sm:px-4 py-3 sm:py-4 text-sm font-medium bg-muted/30 ">Verification</td>
             {selectedChains.map(chain => (
               <td key={chain.chainId} className="px-3 sm:px-4 py-3 sm:py-4 text-sm">
                 <Badge variant={chain.verified ? "default" : "outline"} className="text-xs">
@@ -271,8 +277,8 @@ const Compare = () => {
           </tr>
 
           {/* Performance Metrics */}
-          <tr className="border-b border-border/50 bg-blue-50/20">
-            <td className="p-4 font-medium bg-blue-100/30">Performance Score</td>
+          <tr className="border-b border-border/50">
+            <td className="p-4 font-medium bg-muted/30">Performance Score</td>
             {selectedChains.map(chain => {
               const metrics = performanceData[chain.chainId]
               const score = getPerformanceScore(metrics)
@@ -689,8 +695,8 @@ const Compare = () => {
                               <div className="flex items-center justify-between">
                                 <span className="text-sm font-medium">RPC Health</span>
                               </div>
-                              <div className="space-y-1">
-                                {metrics.performanceData.slice(0, 3).map((rpc: any, index: number) => (
+                              {/* <div className="space-y-1">
+                                {metrics.performanceData.map((rpc: any, index: number) => (
                                   <div key={index} className="flex items-center justify-between text-xs">
                                     <span className="truncate max-w-20">{rpc.url.split('/')[2]}</span>
                                     <Badge 
@@ -701,7 +707,35 @@ const Compare = () => {
                                     </Badge>
                                   </div>
                                 ))}
-                              </div>
+                              </div> */}
+
+            <div className="space-y-1">
+  {metrics.performanceData.filter((rpc: any) => rpc.status === 'online').length > 0 ? (
+    metrics.performanceData
+      .filter((rpc: any) => rpc.status === 'online')
+      .map((rpc: any, index: number) => (
+        <div key={index} className="flex items-center justify-between text-xs">
+          <span className="truncate max-w-20">{rpc.url.split('/')[2]}</span>
+          <div className="flex items-center gap-2">
+            <Badge variant="default" className="text-xs">
+              {rpc.status}
+            </Badge>
+            <button
+              onClick={() => navigator.clipboard.writeText(rpc.url)}
+              className="p-1 rounded hover:bg-gray-200"
+            >
+              <Copy className="w-4 h-4 text-blue-500" />
+            </button>
+          </div>
+        </div>
+      ))
+  ) : (
+    <div className="text-xs text-gray-200">No online RPCs</div>
+  )}
+</div>
+
+
+
                             </div>
                           )}
                         </CardContent>

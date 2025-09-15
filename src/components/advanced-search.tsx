@@ -87,9 +87,9 @@ export const AdvancedSearch = ({
         const newSearches = [searchQuery, ...prev.filter(s => s !== searchQuery)]
         return newSearches.slice(0, 5) // Keep only 5 recent searches
       })
-      
-      onSearch(searchQuery, selectedTags)
+
     }
+    onSearch(searchQuery, selectedTags);
   }, [query, selectedTags, onSearch])
 
   const handleClear = useCallback(() => {
