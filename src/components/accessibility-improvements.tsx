@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 
@@ -10,22 +10,22 @@ export const useFocusManagement = () => {
 
   const focusFirstElement = () => {
     if (focusRef.current) {
-      const focusableElements = focusRef.current.querySelectorAll(
+      const focusableElements = focusRef.current.querySelectorAll<HTMLElement>(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       )
       if (focusableElements.length > 0) {
-        (focusableElements[0] as HTMLElement).focus()
+        focusableElements[0].focus()
       }
     }
   }
 
   const focusLastElement = () => {
     if (focusRef.current) {
-      const focusableElements = focusRef.current.querySelectorAll(
+      const focusableElements = focusRef.current.querySelectorAll<HTMLElement>(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       )
       if (focusableElements.length > 0) {
-        (focusableElements[focusableElements.length - 1] as HTMLElement).focus()
+        focusableElements[focusableElements.length - 1].focus()
       }
     }
   }
@@ -55,15 +55,17 @@ export const AccessibleCard = React.forwardRef<
   <Card
     ref={ref}
     role={role}
-    className={cn("focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2", className)}
+    className={cn(
+      "focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2",
+      className
+    )}
     tabIndex={0}
     {...props}
   />
 ))
-
 AccessibleCard.displayName = 'AccessibleCard'
 
-// Accessible button with proper ARIA labels
+// Accessible button component
 export const AccessibleButton = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button> & {
@@ -81,7 +83,6 @@ export const AccessibleButton = React.forwardRef<
     {children}
   </Button>
 ))
-
 AccessibleButton.displayName = 'AccessibleButton'
 
 // Accessible badge component
@@ -91,16 +92,12 @@ export const AccessibleBadge = React.forwardRef<
     'aria-label'?: string
   }
 >(({ className, children, ...props }, ref) => (
-  <Badge
-    ref={ref}
-    className={cn("focus:ring-2 focus:ring-primary focus:ring-offset-2", className)}
-    {...props}
-  >
-    {children}
-  </Badge>
+  <div ref={ref} className={cn("focus:ring-2 focus:ring-primary focus:ring-offset-2", className)}>
+    <Badge {...props}>{children}</Badge>
+  </div>
 ))
-
 AccessibleBadge.displayName = 'AccessibleBadge'
+
 
 // Keyboard navigation hook
 export const useKeyboardNavigation = (
@@ -114,15 +111,11 @@ export const useKeyboardNavigation = (
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault()
-        setFocusedIndex(prev => 
-          prev < items.length - 1 ? prev + 1 : 0
-        )
+        setFocusedIndex(prev => (prev < items.length - 1 ? prev + 1 : 0))
         break
       case 'ArrowUp':
         event.preventDefault()
-        setFocusedIndex(prev => 
-          prev > 0 ? prev - 1 : items.length - 1
-        )
+        setFocusedIndex(prev => (prev > 0 ? prev - 1 : items.length - 1))
         break
       case 'Enter':
       case ' ':
@@ -144,9 +137,11 @@ export const useKeyboardNavigation = (
 
   useEffect(() => {
     if (focusedIndex >= 0 && containerRef.current) {
-      const focusableElements = containerRef.current.querySelectorAll('[tabindex="0"]')
+      const focusableElements = containerRef.current.querySelectorAll<HTMLElement>(
+        '[tabindex="0"]'
+      )
       if (focusableElements[focusedIndex]) {
-        (focusableElements[focusedIndex] as HTMLElement).focus()
+        focusableElements[focusedIndex].focus()
       }
     }
   }, [focusedIndex])
@@ -160,31 +155,27 @@ export const ScreenReaderOnly = ({ children }: { children: React.ReactNode }) =>
 )
 
 // Live region for announcements
-export const LiveRegion = ({ 
-  children, 
+export const LiveRegion = ({
+  children,
   'aria-live': ariaLive = 'polite',
-  'aria-atomic': ariaAtomic = true 
-}: { 
+  'aria-atomic': ariaAtomic = true,
+}: {
   children: React.ReactNode
   'aria-live'?: 'polite' | 'assertive' | 'off'
   'aria-atomic'?: boolean
 }) => (
-  <div
-    aria-live={ariaLive}
-    aria-atomic={ariaAtomic}
-    className="sr-only"
-  >
+  <div aria-live={ariaLive} aria-atomic={ariaAtomic} className="sr-only">
     {children}
   </div>
 )
 
 // Accessible loading state
-export const AccessibleLoading = ({ 
+export const AccessibleLoading = ({
   message = "Loading content...",
-  'aria-label': ariaLabel 
-}: { 
+  'aria-label': ariaLabel,
+}: {
   message?: string
-  'aria-label'?: string 
+  'aria-label'?: string
 }) => (
   <div
     role="status"
@@ -198,29 +189,25 @@ export const AccessibleLoading = ({
 )
 
 // Accessible error state
-export const AccessibleError = ({ 
+export const AccessibleError = ({
   message,
-  'aria-label': ariaLabel 
-}: { 
+  'aria-label': ariaLabel,
+}: {
   message: string
-  'aria-label'?: string 
+  'aria-label'?: string
 }) => (
-  <div
-    role="alert"
-    aria-label={ariaLabel || `Error: ${message}`}
-    className="text-destructive"
-  >
+  <div role="alert" aria-label={ariaLabel || `Error: ${message}`} className="text-destructive">
     {message}
   </div>
 )
 
 // Accessible success state
-export const AccessibleSuccess = ({ 
+export const AccessibleSuccess = ({
   message,
-  'aria-label': ariaLabel 
-}: { 
+  'aria-label': ariaLabel,
+}: {
   message: string
-  'aria-label'?: string 
+  'aria-label'?: string
 }) => (
   <div
     role="status"
@@ -240,15 +227,10 @@ export const AccessibleList = React.forwardRef<
     'aria-describedby'?: string
   }
 >(({ className, children, ...props }, ref) => (
-  <ul
-    ref={ref}
-    className={cn("focus:outline-none", className)}
-    {...props}
-  >
+  <ul ref={ref} className={cn("focus:outline-none", className)} {...props}>
     {children}
   </ul>
 ))
-
 AccessibleList.displayName = 'AccessibleList'
 
 // Accessible list item component
@@ -268,7 +250,6 @@ export const AccessibleListItem = React.forwardRef<
     {children}
   </li>
 ))
-
 AccessibleListItem.displayName = 'AccessibleListItem'
 
 // Accessible search input
@@ -285,14 +266,10 @@ export const AccessibleSearchInput = React.forwardRef<
   <input
     ref={ref}
     type="search"
-    className={cn(
-      "focus:ring-2 focus:ring-primary focus:ring-offset-2",
-      className
-    )}
+    className={cn("focus:ring-2 focus:ring-primary focus:ring-offset-2", className)}
     {...props}
   />
 ))
-
 AccessibleSearchInput.displayName = 'AccessibleSearchInput'
 
 // Accessible navigation component
@@ -303,46 +280,50 @@ export const AccessibleNavigation = React.forwardRef<
     'aria-describedby'?: string
   }
 >(({ className, children, ...props }, ref) => (
-  <nav
-    ref={ref}
-    className={cn("focus:outline-none", className)}
-    {...props}
-  >
+  <nav ref={ref} className={cn("focus:outline-none", className)} {...props}>
     {children}
   </nav>
 ))
-
 AccessibleNavigation.displayName = 'AccessibleNavigation'
 
-// Accessible heading component
-export const AccessibleHeading = React.forwardRef<
-  HTMLHeadingElement,
-  React.ComponentProps<'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'> & {
-    level: 1 | 2 | 3 | 4 | 5 | 6
-    'aria-label'?: string
-  }
->(({ level, className, children, ...props }, ref) => {
-  const Component = `h${level}` as keyof JSX.IntrinsicElements
-  return (
-    <Component
-      ref={ref}
-      className={cn("focus:outline-none", className)}
-      {...props}
-    >
-      {children}
-    </Component>
-  )
-})
+// Polymorphic AccessibleHeading component with proper typings
+type HeadingLevels = 1 | 2 | 3 | 4 | 5 | 6;
 
-AccessibleHeading.displayName = 'AccessibleHeading'
+type AccessibleHeadingProps<C extends React.ElementType> = {
+  as?: C;
+  level?: HeadingLevels;
+  className?: string;
+  children?: React.ReactNode;
+  'aria-label'?: string;
+} & Omit<
+  React.ComponentPropsWithoutRef<C>,
+  'as' | 'children' | 'className' | 'aria-label'
+>;
+
+const defaultHeadingElement = 'h2';
+
+export const AccessibleHeading = React.forwardRef(
+  <C extends React.ElementType = typeof defaultHeadingElement>(
+    { as, level = 2, className, children, ...rest }: AccessibleHeadingProps<C>,
+    ref: React.Ref<any>
+  ) => {
+    const Component = as || (`h${level}` as React.ElementType);
+    return (
+      <Component ref={ref} className={cn("focus:outline-none", className)} {...rest}>
+        {children}
+      </Component>
+    );
+  }
+);
+AccessibleHeading.displayName = 'AccessibleHeading';
 
 // Accessible link component
 export const AccessibleLink = React.forwardRef<
   HTMLAnchorElement,
   React.ComponentProps<'a'> & {
-    'aria-label'?: string
-    'aria-describedby'?: string
-    'aria-current'?: 'page' | 'step' | 'location' | 'date' | 'time' | 'true' | 'false'
+    'aria-label'?: string;
+    'aria-describedby'?: string;
+    'aria-current'?: 'page' | 'step' | 'location' | 'date' | 'time' | 'true' | 'false';
   }
 >(({ className, children, ...props }, ref) => (
   <a
@@ -355,30 +336,43 @@ export const AccessibleLink = React.forwardRef<
   >
     {children}
   </a>
-))
+));
+AccessibleLink.displayName = 'AccessibleLink';
 
-AccessibleLink.displayName = 'AccessibleLink'
-
-// Accessibility context provider
+// Accessibility context provider with live region announcements
 export const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
-  const [announcements, setAnnouncements] = React.useState<string[]>([])
+  const [announcements, setAnnouncements] = React.useState<string[]>([]);
 
   const announce = React.useCallback((message: string) => {
-    setAnnouncements(prev => [...prev, message])
-    // Clear announcement after 3 seconds
+    setAnnouncements((prev) => [...prev, message]);
     setTimeout(() => {
-      setAnnouncements(prev => prev.filter(a => a !== message))
-    }, 3000)
-  }, [])
+      setAnnouncements((prev) => prev.filter((a) => a !== message));
+    }, 3000);
+  }, []);
 
   return (
     <div>
       {children}
-      <LiveRegion aria-live="polite" aria-atomic="false">
+      <LiveRegion aria-live="polite" aria-atomic={false}>
         {announcements.map((announcement, index) => (
           <div key={index}>{announcement}</div>
         ))}
       </LiveRegion>
     </div>
-  )
-} 
+  );
+};
+
+// Live region implementation
+// export const LiveRegion = ({
+//   children,
+//   'aria-live': ariaLive = 'polite',
+//   'aria-atomic': ariaAtomic = true,
+// }: {
+//   children: React.ReactNode;
+//   'aria-live'?: 'polite' | 'assertive' | 'off';
+//   'aria-atomic'?: boolean;
+// }) => (
+//   <div aria-live={ariaLive} aria-atomic={ariaAtomic} className="sr-only">
+//     {children}
+//   </div>
+// );

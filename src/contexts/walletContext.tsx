@@ -24,56 +24,56 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
   const [connecting, setConnecting] = useState(false);
   const [connectedWallet, setConnectedWallet] = useState<string | null>(null);
 
-  useEffect(() => {
-    const initWallet = async () => {
-      const wallet = await WalletKit.init({
-        core: walletConnectCore,
-        metadata: {
-          name: "My Reown Vite TS App",
-          description: "Demo React Vite TypeScript app with Reown Wallet",
-          url: "http://localhost:8080", // or your deployed URL
-          icons: [],
-        },
-      });
+  // useEffect(() => {
+  //   const initWallet = async () => {
+  //     const wallet = await WalletKit.init({
+  //       core: walletConnectCore,
+  //       metadata: {
+  //         name: "My Reown Vite TS App",
+  //         description: "Demo React Vite TypeScript app with Reown Wallet",
+  //         url: "http://localhost:8080", // or your deployed URL
+  //         icons: [],
+  //       },
+  //     });
 
-      setWalletkit(wallet);
+  //     setWalletkit(wallet);
 
-      // Show QR when pairing
-      (wallet as any).on("display_uri", (uri: string) => {
-        QRCodeModal.open(uri, () => {
-          QRCodeModal.close();
-        });
-      });
+  //     // Show QR when pairing
+  //     (wallet as any).on("display_uri", (uri: string) => {
+  //       QRCodeModal.open(uri, () => {
+  //         QRCodeModal.close();
+  //       });
+  //     });
 
-      // Handle approved session
-      wallet.on("session_proposal", async (proposal) => {
-        const namespaces = {
-          eip155: {
-            accounts: [
-              "eip155:1:0x0000000000000000000000000000000000000000",
-            ],
-            methods: ["eth_sendTransaction", "personal_sign", "eth_signTypedData"],
-            events: ["accountsChanged", "chainChanged"],
-          },
-        };
+  //     // Handle approved session
+  //     wallet.on("session_proposal", async (proposal) => {
+  //       const namespaces = {
+  //         eip155: {
+  //           accounts: [
+  //             "eip155:1:0x0000000000000000000000000000000000000000",
+  //           ],
+  //           methods: ["eth_sendTransaction", "personal_sign", "eth_signTypedData"],
+  //           events: ["accountsChanged", "chainChanged"],
+  //         },
+  //       };
 
-        const approvedSession = await wallet.approveSession({
-          id: proposal.id,
-          namespaces,
-        });
+  //       const approvedSession = await wallet.approveSession({
+  //         id: proposal.id,
+  //         namespaces,
+  //       });
 
-        setSession(approvedSession);
-        QRCodeModal.close();
-      });
+  //       setSession(approvedSession);
+  //       QRCodeModal.close();
+  //     });
 
-      // Handle disconnect
-      wallet.on("session_delete", () => {
-        setSession(null);
-      });
-    };
+  //     // Handle disconnect
+  //     wallet.on("session_delete", () => {
+  //       setSession(null);
+  //     });
+  //   };
 
-    initWallet();
-  }, []);
+  //   initWallet();
+  // }, []);
 
   // 🔹 Pair and return accounts
   const pair = async (uri: string): Promise<string[]> => {

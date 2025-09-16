@@ -273,7 +273,7 @@ export const AdvancedSearch = ({
       )}
 
       {/* Suggested Tags */}
-      <div className="mt-3">
+      {/* <div className="mt-3">
         <div className="text-sm text-muted-foreground mb-2">Quick Filters:</div>
         <div className="flex flex-wrap gap-2">
           {SUGGESTED_TAGS.map((tag) => (
@@ -287,7 +287,7 @@ export const AdvancedSearch = ({
             </Badge>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

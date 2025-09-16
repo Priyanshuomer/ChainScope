@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
@@ -36,6 +36,7 @@ import { chainDataMerger } from '@/lib/chain-data-merger'
 import Analytics from './analytics'
 
 import { FiltersDropdown } from "../components/FiltersDropdown"
+// import { QuickFilters } from '../components/QuickFilters'
 
 import {
   Dialog,
@@ -46,8 +47,17 @@ import {
 
 
 
+import { doesChainMatchTag } from '@/utils/chainMatch'
+import { QuickFilters } from '@/components/QuickFilters'
+
+
+
+
+
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('')
+  const [resetQuickFilters, setResetQuickFilters] = useState(0)
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [selectedFilters, setSelectedFilters] = useState<string[]>([])
   const [activeTab, setActiveTab] = useState('all')
@@ -127,6 +137,17 @@ const Index = () => {
     }
   }, [infiniteData?.allChains, isLoading])
 
+  const allChains = infiniteData?.allChains || [];
+
+ 
+
+  const filteredChains = useMemo(() => {
+    if (!selectedTags.length) return allChains;
+    return allChains.filter(chain =>
+      selectedTags.every(tag => doesChainMatchTag(chain, tag))
+    );
+  }, [allChains, selectedTags]);
+
   const handleSearch = useCallback((query: string, tags: string[] = []) => {
     setSearchQuery(query)
     setSelectedFilters(tags)
@@ -135,6 +156,7 @@ const Index = () => {
   const handleClear = useCallback(() => {
     setSearchQuery('')
     setSelectedFilters([])
+    setResetQuickFilters(prev => prev + 1)
   }, [])
 
   const handleFilterChange = useCallback((filters: string[]) => {
@@ -295,6 +317,14 @@ const Index = () => {
                 placeholder="Search blockchain networks by name, symbol, chain ID, or network type..."
                 className="mb-4 sm:mb-6"
               />
+
+             <QuickFilters
+  selectedFilters={selectedFilters}
+  onFiltersChange={setSelectedFilters}
+/>
+
+
+
               
               {/* <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center">
                   <NetworkFilters

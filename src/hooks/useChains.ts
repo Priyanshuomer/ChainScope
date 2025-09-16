@@ -65,6 +65,9 @@ export const useInfiniteChains = (
                 return chain.parent === undefined
               case 'evm':
                 return chain.features?.some(f => f.name === 'EIP-155') || true
+               case 'bridge':
+                return chain.tags?.includes('bridged') || false
+
               case 'active':
                 return chain.rpc && chain.rpc.length > 0
               case 'ethereum':
