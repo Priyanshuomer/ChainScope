@@ -367,10 +367,10 @@ const Index = () => {
 {/* 🔹 Filters Button + View Toggle */}
 <div className="flex justify-center items-center gap-6 mb-6 w-full">
   {/* 🔹 Filters dropdown */}
-  <FiltersDropdown
+  {/* <FiltersDropdown
     selectedFilters={selectedFilters}
     onFilterChange={setSelectedFilters}
-  />
+  /> */}
 
   {/* 🔹 Grid/List toggle */}
   <div className="flex items-center gap-2">
@@ -438,12 +438,12 @@ const Index = () => {
     </div>
 
     {/* Body */}
-    <div className="p-6 bg-background max-h-[70vh] overflow-y-auto">
+    {/* <div className="p-6 bg-background max-h-[70vh] overflow-y-auto">
       <NetworkFilters
         selectedFilters={selectedFilters}
         onFilterChange={handleFilterChange}
       />
-    </div>
+    </div> */}
 
     {/* Footer */}
     <div className="flex justify-end gap-3 px-6 py-4 border-t bg-muted/40">

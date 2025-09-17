@@ -12,9 +12,12 @@ const FILTER_OPTIONS = [
   { id: "optimism", label: "Optimism" },
   { id: "avalanche", label: "Avalanche" },
   { id: "bsc", label: "BNB Chain" },
-  { id: "privacy", label: "Privacy" },
-  { id: "bridge", label: "Bridge" },
+  // { id: "privacy", label: "Privacy" },
+  { id: "bridge", label: "Bridges" },
   { id: "verified", label: "Verified" },
+  { id: "deprecated", label: "Deprecated" },
+  { id: "ens", label: "ENS Support" },
+  { id: "faucet", label: "Faucets" },
 ];
 
 interface QuickFiltersProps {
@@ -46,7 +49,7 @@ export const QuickFilters = ({ selectedFilters, onFiltersChange }: QuickFiltersP
             onClick={() => toggleFilter(f.id)}
             className={`cursor-pointer px-3 py-1 transition-all duration-150 ${
               selectedFilters.includes(f.id)
-                ? "bg-primary text-white"
+                ? "bg-primary text-black hover:bg-primary/90"
                 : "bg-muted text-muted-foreground hover:bg-muted/70"
             }`}
           >

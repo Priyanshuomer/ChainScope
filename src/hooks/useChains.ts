@@ -67,11 +67,18 @@ export const useInfiniteChains = (
                 return chain.features?.some(f => f.name === 'EIP-155') || true
                case 'bridge':
                 return chain.tags?.includes('bridged') || false
-
+                case 'ens':
+                return chain.ens?.registry !== undefined
+              case 'faucet':
+                return chain.faucets && chain.faucets.length > 0
+              case 'deprecated':
+                return chain.status === 'deprecated'
               case 'active':
                 return chain.rpc && chain.rpc.length > 0
               case 'ethereum':
                 return chain.name.toLowerCase().includes('ethereum') || chain.chainId === 1
+                case 'rpc':
+                return chain.rpcEndpoints?.some(rpc => rpc.status === 'online') || false
               case 'polygon':
                 return chain.name.toLowerCase().includes('polygon') || chain.chainId === 137
               case 'arbitrum':
